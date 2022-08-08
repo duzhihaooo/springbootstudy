@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.study.mapper.RoleMapper">
+  <resultMap id="rmap" type="com.example.study.demo.Role">
+		<result property="id" column="id"/>
+		<result property="role_name" column="rolename"/>
+		<result property="user_id" column="userid"/>
+		<association property="user" javaType="com.example.study.demo.User">
+			<result property="id" column="id"/>
+			<result property="user_name" column="username"/>
+		</association>
+	</resultMap>
+	<select id="listRole" resultMap="rmap">
+		select u.user_name,r.role_name from user u,role r where u.id = r.user_id;
+	</select>
+    
+ </mapper>

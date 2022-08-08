@@ -12,18 +12,13 @@ target/
 .settings
 .springBeans
 .sts4-cache
-**/mvnw
-**/.mvn
-**/*.cmd
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
-springboot-study-jpa/.mvn
-springboot-study-jpa/HELP.md
-springboot-study-jpa/mvnw
-springboot-study-jpa/mvnw.cmdv
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -36,7 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-.mvn\
-.mvn\
-.mvn\
-.mvn\
