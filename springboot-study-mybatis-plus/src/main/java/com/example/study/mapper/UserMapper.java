@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface UserMapper extends BaseMapper<User> {
 	
-	List<User> listUser();
+
 	
 }
