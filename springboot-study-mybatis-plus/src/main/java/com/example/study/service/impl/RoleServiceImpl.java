@@ -49,7 +49,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             //通过UserRoleService层中的getUserIdListByRoleId方法拿到userIdList   ???
             List<Long> userIdList = userRoleService.getUserIdListByRoleId(roleId);
             //通过userIdList获取users
-            List<User> users = userService.getUsersByids(userIdList);
+            List<User> users = userService.getUsersByIds(userIdList);
             //将List<User>传进oneRoles2NUsers
             oneRoles2NUser.setUsers(users);
             //添加一个对象

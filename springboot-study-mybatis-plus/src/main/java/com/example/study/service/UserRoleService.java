@@ -12,5 +12,5 @@ public interface UserRoleService extends IService {
     
     //List<Long> getUserIdListByRoleId(Long roleId);
     
-    List<OneRoles2NUser> getUserIdListByRoleId(Long roleId);
+    List<Long> getUserIdListByRoleId(Long roleId);
 }
