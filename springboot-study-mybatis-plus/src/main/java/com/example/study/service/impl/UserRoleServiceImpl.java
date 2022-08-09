@@ -23,6 +23,7 @@ public class UserRoleServiceImpl extends ServiceImpl<OneRoles2NUserMapper, com.e
 		  
 		  */
 		List<OneRoles2NUser> list = oneRoles2NUserMapper.selectById(roleId);
+		
 	
 	
 	}

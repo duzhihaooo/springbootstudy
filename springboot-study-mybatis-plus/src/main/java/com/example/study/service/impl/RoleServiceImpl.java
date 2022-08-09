@@ -46,7 +46,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             //将遍历的每个角色名称传给OneROles2NUser
             oneRoles2NUser.setRoleName(role1.getRoleName());
             //通过roleId 获取userIdList
-            //通过UserRoleService层中的getUserIdListByRoleId方法拿到userIdList
+            //通过UserRoleService层中的getUserIdListByRoleId方法拿到userIdList   ???
             List<Long> userIdList = userRoleService.getUserIdListByRoleId(roleId);
             //通过userIdList获取users
             List<User> users = userService.getUsersByids(userIdList);
