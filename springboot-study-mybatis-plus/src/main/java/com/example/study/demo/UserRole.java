@@ -13,13 +13,13 @@ public class UserRole {
     private Long id;
     private Long uid;
     private Long rid;
-    /***
-     * uid  rid
-     * 1    1
-     * 2    1
-     * 3    1
-     * 1    2
-     * 1    3
-     * 1    4
+    /*
+     uid  rid
+     1    1
+     2    1
+     3    1
+     1    2
+     1    3
+     1    4
      */
 }
