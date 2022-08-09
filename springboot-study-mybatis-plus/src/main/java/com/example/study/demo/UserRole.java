@@ -14,7 +14,7 @@ public class UserRole {
     private Long uid;
     private Long rid;
     /***
-     * uid  role
+     * uid  rid
      * 1    1
      * 2    1
      * 3    1
