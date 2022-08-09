@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class NUser2OneRole {
+public class OneUser2NRoles {
     private Long id;
     private String userName;
     List<Role> roles;

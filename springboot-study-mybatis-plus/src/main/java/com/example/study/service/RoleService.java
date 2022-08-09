@@ -10,7 +10,7 @@ import java.util.List;
 public interface RoleService extends IService<Role> {
 	List<Role> listRole();
 	
-	
+	//
 	List<OneRoles2NUser> getRolesUser();
 	
 	//1.添加

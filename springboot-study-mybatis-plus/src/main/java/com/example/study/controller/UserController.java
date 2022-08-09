@@ -30,8 +30,10 @@ public class UserController {
         return roleService.listRole();
     }
     
+    //需要自己了解加深value与method的用法
     @RequestMapping(value = "/get-roles-user", method = RequestMethod.GET)
     private List<OneRoles2NUser> getRolesUser() {
+        //
         return roleService.getRolesUser();
     }
     

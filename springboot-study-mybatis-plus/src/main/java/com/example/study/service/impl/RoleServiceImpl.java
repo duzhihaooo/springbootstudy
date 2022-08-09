@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 @Service
+//为什么在ServiceImpl层延申Mapper？
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements RoleService {
     
     @Resource
@@ -40,12 +41,16 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             Long roleId = role1.getId();
             //新建一个NRoles2OneUser对象
             OneRoles2NUser oneRoles2NUser = new OneRoles2NUser();
+            //将遍历的每个角色Id传给OneROles2NUser
             oneRoles2NUser.setId(roleId);
+            //将遍历的每个角色名称传给OneROles2NUser
             oneRoles2NUser.setRoleName(role1.getRoleName());
             //通过roleId 获取userIdList
+            //通过UserRoleService层中的getUserIdListByRoleId方法拿到userIdList
             List<Long> userIdList = userRoleService.getUserIdListByRoleId(roleId);
             //通过userIdList获取users
             List<User> users = userService.getUsersByids(userIdList);
+            //将List<User>传进oneRoles2NUsers
             oneRoles2NUser.setUsers(users);
             //添加一个对象
             oneRoles2NUsers.add(oneRoles2NUser);
