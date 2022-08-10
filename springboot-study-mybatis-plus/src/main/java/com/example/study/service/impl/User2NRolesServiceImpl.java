@@ -4,44 +4,19 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.study.demo.UserRole;
 import com.example.study.mapper.UserRoleMapper;
-import com.example.study.service.UserRoleService;
-import java.util.ArrayList;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.study.service.User2NRolesService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> implements UserRoleService {
+public class User2NRolesServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements User2NRolesService {
 	
 	@Resource
 	private UserRoleMapper userRoleMapper;
 	
-	@Override
-	public List<Long> getUserIdListByRoleId(Long roleId) {
-		/*1.为什么是用List去接收，因为传进来的只有1个roleId
-		  2.是不是应该用条件约束器，使进传来的roleId与数据库中的role_id匹配，从而拿到user_id
-		  3.基础太差，不知道该如何通过传进来的roleId与实体类的rid相匹配再拿到实体类的uid（应该是从oneRoles2NUserMapper.方法里面获取）
-		  */
-		//构建新的条件约束器
-		QueryWrapper<UserRole> wrapper = new QueryWrapper<>();
-		//判断role_id与roleId字段匹配
-		wrapper.eq("role_id", roleId);
-		//通过传进来的roleId拿到相对应的userrole集合
-		List<UserRole> list = userRoleMapper.selectList(wrapper);
-		//新建一个userRole数组
-		List<Long> userIds = new ArrayList<>();
-		//1.遍历刚才拿到对应的userrole集合
-		//2.遍历的每一条都是userRole对象
-		for (UserRole userRole : list) {
-			//通过userRole.getUid方法拿到与roleId相匹配的userId
-			userIds.add(userRole.getUid());
-		}
-		return userIds;
-	}
-/*
 	@Override
 	public List<Long> getRoleIdListByUserId(Long userId){
 		//新建一个条件约束器
@@ -64,5 +39,5 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
 		
 		return roleList;
 	}
- */
+	
 }

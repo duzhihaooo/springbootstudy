@@ -13,6 +13,9 @@ public interface RoleService extends IService<Role> {
 	//
 	List<OneRoles2NUser> getRolesUser();
 	
+	//设置通过List<Long> getRolesById(List<Long> roleList)的方法
+	List<Role> getRolesById(List<Long> roleIdList);
+	
 	//1.添加
 	//2.删除
 	//3.修改

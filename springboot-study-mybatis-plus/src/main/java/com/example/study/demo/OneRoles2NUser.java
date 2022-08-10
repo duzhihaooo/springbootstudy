@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class OneRoles2NUser {
+    
     private Long id;
     
     private String roleName;

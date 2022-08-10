@@ -34,7 +34,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     public List<OneRoles2NUser> getRolesUser() {
         //1.拿到role的集合
         List<Role> roleList = listRole();
-        //2.设置一个listRoles
+        //2.设置一个listOneRoles2NUser去接收
         List<OneRoles2NUser> oneRoles2NUsers = new ArrayList<>();
         //3.遍历for的集合
         for (Role role1 : roleList) {
@@ -54,7 +54,21 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             oneRoles2NUser.setUsers(users);
             //添加一个对象
             oneRoles2NUsers.add(oneRoles2NUser);
+            
         }
         return oneRoles2NUsers;
+    }
+    
+    @Override
+    public List<Role> getRolesById(List<Long> roleIdList){
+        //新建一个对象Role的集合
+        List<Role> roleList = new ArrayList<>();
+        //遍历所传进来的roleIdList的值
+        for (Long id:roleIdList){
+            //遍历的每条结果是id，所以通过selectById（）的方法查询出角色
+            Role role = roleMapper.selectById(id);
+            roleList.add(role);
+        }
+        return roleList;
     }
 }

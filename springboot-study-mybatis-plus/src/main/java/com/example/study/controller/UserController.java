@@ -1,6 +1,7 @@
 package com.example.study.controller;
 
 import com.example.study.demo.OneRoles2NUser;
+import com.example.study.demo.OneUser2NRoles;
 import com.example.study.demo.Role;
 import com.example.study.demo.User;
 import com.example.study.service.RoleService;
@@ -20,10 +21,7 @@ public class UserController {
     @Resource
     private UserService userService;
     
-    @RequestMapping(value = "/list-user", method = RequestMethod.GET)
-    private List<User> listUser() {
-        return userService.listUser();
-    }
+    
     
     @RequestMapping(value = "/list-role", method = RequestMethod.GET)
     private List<Role> listRole() {
@@ -36,6 +34,16 @@ public class UserController {
         //
         return roleService.getRolesUser();
     }
+    
+    
+    
+    //查询一个用户对应多个角色
+    @RequestMapping(value = "get-oneUser-2NRoles")
+    private List<OneUser2NRoles> getOneUser2NRoles(){
+        
+        return userService.getOneUser2NRoles();
+    }
+    
     
     @RequestMapping(value = { "/hello", "/hello-a" }, method = RequestMethod.GET)
     public String index() {
