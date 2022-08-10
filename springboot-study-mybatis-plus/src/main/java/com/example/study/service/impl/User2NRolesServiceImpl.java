@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+//todo 因为都是属于一个mapper的，索引可以放在一个service中
 @Service
 public class User2NRolesServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements User2NRolesService {
 	
@@ -30,7 +31,7 @@ public class User2NRolesServiceImpl extends ServiceImpl<UserRoleMapper, UserRole
 		//新建一个集合去接收rid
 		List<Long> roleList = new ArrayList<>();
 		for (UserRole userRole:userRoleList){
-			//为什么不能用这个方法来写
+			//为什么不能用这个方法来写：todo因为遍历只有一个对象
 			//List<Long> roleList = userRole.getRid();
 			
 			
