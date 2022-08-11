@@ -12,6 +12,8 @@ import com.example.study.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
+import org.springframework.boot.ApplicationContextFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -70,7 +72,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 			
 			//通过数据库中表UserRole，拿到了与userId对应的roleId，此时应该到数据库表Role中拿到与roleId所对应的相关详细信息
 			//List<Role> roleList = roleService.getRolesById(roleIdList);
-			
 			List<Role> roleList2 = new ArrayList<>();
 			for (Long id:roleIdList){
 				Role role = roleMapper.selectById(id);

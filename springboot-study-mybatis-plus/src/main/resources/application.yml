@@ -1,4 +1,7 @@
 spring:
+  main:
+    ##todo 应该可以解决循环依赖
+    allow-circular-references: false
   # 配置数据源信息
   datasource:
     # 配置数据源类型

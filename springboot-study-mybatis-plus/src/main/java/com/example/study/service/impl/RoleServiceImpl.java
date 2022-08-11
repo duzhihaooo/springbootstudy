@@ -14,7 +14,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 @Service
-//为什么在ServiceImpl层延申Mapper？
+//为什么在ServiceImpl层延申Mapper？todo 本来是可以写可以不写的，也就是说这一块可以直接去掉ServiceImpl<RoleMapper, Role>
+//并不会对功能产生实际的收益
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements RoleService {
     
     @Resource
