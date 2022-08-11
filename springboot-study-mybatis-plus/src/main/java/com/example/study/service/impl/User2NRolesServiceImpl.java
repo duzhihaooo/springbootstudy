@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
-//todo 因为都是属于一个mapper的，索引可以放在一个service中
+//todo 因为都是属于一个mapper的，索引可以放在一个service中:UserRoleServiceImpl 来进行对应的编写
 @Service
 public class User2NRolesServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements User2NRolesService {
 	
