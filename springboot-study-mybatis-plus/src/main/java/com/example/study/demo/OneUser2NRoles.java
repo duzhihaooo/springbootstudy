@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+
 public class OneUser2NRoles {
     //一个用户对应多个角色
     /*

@@ -76,23 +76,37 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 			for (Long id:roleIdList){
 				Role role = roleMapper.selectById(id);
 				roleList2.add(role);
-				
 			}
-			
-			
-			
 			//将所查询出的详细角色信息再添加回oneUser2Nroles的List<Role>集合中
 			oneUser2NRoles.setRoles(roleList2);
-			
 			//再将设置好的oneUser2NRoles对象再添加回集合listOneUser2NRoles中
 			listOneUser2NRoles.add(oneUser2NRoles);
 		}
-		
 		return listOneUser2NRoles;
-		
-		
 	}
 	
+	//添加用户
+	@Override
+	public int add(User user){
+		int id =userMapper.insert(user);
+		return id;
+	}
+	
+	//修改用户
+	@Override
+	public int update(User user){
+		//自己了解 updateById为什么可以直接传进来user
+		// int updateById(@Param("et") T entity);
+		int id =userMapper.updateById(user);
+		return id;
+	}
+	
+	//删除用户
+	@Override
+	public int delete(User user){
+		int id = userMapper.deleteById(user);
+		return id;
+	}
 	
 
 }

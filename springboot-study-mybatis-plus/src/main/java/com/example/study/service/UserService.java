@@ -14,4 +14,13 @@ public interface UserService extends IService<User> {
 	
 	List<OneUser2NRoles> getOneUser2NRoles();
 	
+	//添加用户
+	public int add(User user);
+	
+	//修改用户
+	public int update(User user);
+	
+	//删除用户
+	public int delete(User user);
+	
 }
