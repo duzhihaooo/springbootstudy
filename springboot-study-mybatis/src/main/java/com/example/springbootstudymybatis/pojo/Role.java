@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Role {
 	
-	private Long id;
+	private Integer id;
 	private String role_name;
-	private Integer user_id;
 	
 	
 }

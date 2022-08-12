@@ -49,16 +49,16 @@ public class UserController {
     @RequestMapping(value = "add",method = RequestMethod.GET)
     
     //为什么是用Object？ 因为是添加的一个对象原因吗？ String那里的含义！ 因为只是回复的是一条数据吗
-    private Object add(String msg){
-        User user1 = new User();
+    public User add(){
+        User user = new User();
         //数据库中已经设置id为主键，不是传数据进去会自增吗
         //我不传setId的话 会报错
         //user1.setId(15L);
         //我在实体类User中添加了 @TableId(type = IdType.AUTO) 好像就实现了自动添加id功能，但我单独添加@TableId时却不默认id为主键
-        user1.setUserName("Taylor");
-        int row = userService.add(user1);
+        user.setUserName("Taylor");
+        int row = userService.add(user);
         
-        return user1;
+        return user;
     }
     
     //修改一个用户

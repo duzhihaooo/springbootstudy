@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springbootstudymybatis.dao.RoleDao">
+	<!--与数据库中的字段相匹配-->
+	<resultMap id="BaseResultMap" type="com.example.springbootstudymybatis.pojo.Role">
+		<result column="id" jdbcType="INTEGER" property="id" />
+		<result column="role_name" jdbcType="VARCHAR" property="role_name"/>
+	</resultMap>
+	
+	<!--1.查询角色信息-->
+    <select id="getRoleInfo" resultType="com.example.springbootstudymybatis.pojo.Role">
+	    SELECT * FROM role WHERE id = #{id}
+    </select>
+	
+	<!--2.删除角色-->
+	<delete id="deleteRole" parameterType="int">
+		DELETE FROM role WHERE id = #{id}
+	</delete>
+	
+	<!--3.新增角色-->
+	<insert id="addRole" parameterType="int">
+		INSERT INTO role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="role_name != null">
+				role_name
+			</if>
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="role_name != null">
+				#{role_name,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	<!--4.修改角色-->
+	<update id="updateRole" parameterType="int">
+		UPDATE role
+		<set>
+			<if test="role_name != null">
+				role_name = #{role_name,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<!--5.查询所有角色信息-->
+	<select id="getAllRole" resultType="com.example.springbootstudymybatis.pojo.Role">
+		SELECT * FROM role;
+	</select>
+	
+	
+ </mapper>

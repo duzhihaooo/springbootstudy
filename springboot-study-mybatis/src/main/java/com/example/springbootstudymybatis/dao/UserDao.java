@@ -10,6 +10,18 @@ import java.util.List;
 @Mapper
 public interface UserDao {
 	
+	//查询指定用户
+	User getUserInfo(int id);
 	
-	public List<UserRole> selectUserRoleList();
+	//删除用户
+	int deleteUser(int id);
+	//新增用户
+	int addUser(User user);
+	//修改用户
+	int updateUser(User user);
+	//查询所有用户信息
+	List<User> getAllUser();
+	
+	//
+	
 }

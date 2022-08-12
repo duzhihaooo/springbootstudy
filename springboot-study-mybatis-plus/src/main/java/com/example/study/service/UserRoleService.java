@@ -2,6 +2,7 @@ package com.example.study.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.study.demo.OneRoles2NUser;
+import com.example.study.demo.Role;
 import com.example.study.demo.UserRole;
 
 import java.util.List;
@@ -14,7 +15,23 @@ public interface UserRoleService extends IService<UserRole> {
     //List<Long> getUserIdListByRoleId(Long roleId);
     
     List<Long> getUserIdListByRoleId(Long roleId);
+    
+    List<Long> getRoleIdListByUserId(Long userId);
     /*
     List<Long> getRoleIdListByUserId(Long userId);
     */
+    
+    //查找数据库UserRole
+    List<UserRole> listUserRole();
+    
+    //添加
+    public int add(UserRole userRole);
+    
+    //删除
+    public int delete(UserRole userRole);
+   
+    //修改
+    public int update(UserRole userRole);
+    
+    
 }

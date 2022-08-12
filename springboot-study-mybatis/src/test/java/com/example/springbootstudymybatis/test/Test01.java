@@ -12,7 +12,10 @@ public class Test01 {
 	@Autowired
 	private UserDao userDao;
 	
+	@Test
+	public void test01(){
 	
+	}
 	
 	
 }

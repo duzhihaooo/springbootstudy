@@ -4,11 +4,60 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.springbootstudymybatis.dao.UserDao">
  
-        <select id="selectUserRoleList" resultType="com.example.springbootstudymybatis.pojo.UserRole">
-            select u.user_name,r.role_name
-            from
-            user u,role r where u.id = r.user_id;
-        </select>
+	<!--与数据库中的字段相匹配-->
+	<resultMap id="BaseResultMap" type="com.example.springbootstudymybatis.pojo.User">
+		<result column="id" jdbcType="INTEGER" property="id" />
+		<result column="user_name" jdbcType="VARCHAR" property="user_name" />
+	</resultMap>
  
-    
+	<!--1.查询用户信息-->
+	<!--resultType的字段是返回信息的意思吗？ 因为查询用户我所返回的是一个对象，所以这里就应该写对象的绝对路径？-->
+	<select id="getUserInfo" resultType="com.example.springbootstudymybatis.pojo.User">
+		SELECT * FROM user WHERE id = #{id}
+	</select>
+	
+	<!--2.删除用户-->
+	<!--删除用户信息执行后所返回的是执行了1条删除信息，所以这里应该用parameterType接收？-->
+	<delete id="deleteUser" parameterType="int">
+		DELETE FROM user WHERE id = #{id}
+	</delete>
+	
+	<!--3.新增用户-->
+	<!--对xml文件里的resultType字段和parameterType不太明白-->
+	<!--在xml文件中，新增用户方法这里，我这里传进来的是个User对象，但在sql语句里，可以直接拿到id，user_name 是不是因为getset方法-->
+	<insert id="addUser"	parameterType="int">
+		INSERT INTO user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="user_name != null">
+				user_name
+			</if>
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="user_name != null">
+				#{user_name,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	<!--4.修改用户-->
+	<update id="updateUser" parameterType="int">
+		UPDATE user
+		<set>
+			<if test="user_name != null">
+				user_name = #{user_name,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<!--5.查询所有用户信息-->
+	<select id="getAllUser" resultType="com.example.springbootstudymybatis.pojo.User">
+		SELECT * FROM user;
+	</select>
  </mapper>

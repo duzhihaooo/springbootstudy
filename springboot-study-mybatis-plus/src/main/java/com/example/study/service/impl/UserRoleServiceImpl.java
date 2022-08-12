@@ -2,6 +2,8 @@ package com.example.study.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.study.demo.Role;
+import com.example.study.demo.User;
 import com.example.study.demo.UserRole;
 import com.example.study.mapper.UserRoleMapper;
 import com.example.study.service.UserRoleService;
@@ -41,7 +43,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
 		}
 		return userIds;
 	}
-/*
+
 	@Override
 	public List<Long> getRoleIdListByUserId(Long userId){
 		//新建一个条件约束器
@@ -64,5 +66,35 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
 		
 		return roleList;
 	}
- */
+	
+	//查找
+	@Override
+	public  List<UserRole> listUserRole(){
+		return userRoleMapper.selectList(null);
+	}
+	
+	//添加
+	@Override
+	public int add(UserRole userRole){
+		int row = userRoleMapper.insert(userRole);
+		return row;
+	}
+	
+	//删除
+	@Override
+	public int delete(UserRole userRole){
+		int row = userRoleMapper.deleteById(userRole);
+		return row;
+	}
+	
+	//修改
+	@Override
+	public int update(UserRole userRole){
+		int row = userRoleMapper.updateById(userRole);
+		return row;
+	}
+	
+	
+	
+	
 }

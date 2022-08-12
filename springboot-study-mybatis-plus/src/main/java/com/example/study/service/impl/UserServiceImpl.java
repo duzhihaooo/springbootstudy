@@ -6,14 +6,12 @@ import com.example.study.demo.Role;
 import com.example.study.demo.User;
 import com.example.study.mapper.RoleMapper;
 import com.example.study.mapper.UserMapper;
-import com.example.study.service.RoleService;
-import com.example.study.service.User2NRolesService;
+import com.example.study.service.UserRoleService;
 import com.example.study.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
-import org.springframework.boot.ApplicationContextFactory;
-import org.springframework.context.ApplicationContext;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,7 +23,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 	private RoleMapper roleMapper;
 	
 	@Resource
-	private User2NRolesService user2NRolesService;
+	private UserRoleService userRoleService;
 	
 	/*
 	@Resource
@@ -68,7 +66,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 			oneUser2NRoles.setUserName(user.getUserName());
 			//将得到的遍历的user.id通过UserRoleService层中getRoleIdListByUserId方法拿到roleId
 			//此时应该去userRoleService去实现getRoleIdListByUserId方法
-			List<Long> roleIdList = user2NRolesService.getRoleIdListByUserId(user.getId());
+			List<Long> roleIdList = userRoleService.getRoleIdListByUserId(user.getId());
 			
 			//通过数据库中表UserRole，拿到了与userId对应的roleId，此时应该到数据库表Role中拿到与roleId所对应的相关详细信息
 			//List<Role> roleList = roleService.getRolesById(roleIdList);
