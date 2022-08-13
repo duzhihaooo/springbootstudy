@@ -2,7 +2,6 @@ package com.example.springbootstudymybatis.controller;
 
 import com.example.springbootstudymybatis.pojo.Role;
 import com.example.springbootstudymybatis.pojo.Role_2NUser;
-import com.example.springbootstudymybatis.pojo.User_2NRoles;
 import com.example.springbootstudymybatis.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +37,7 @@ public class RoleController {
 	@RequestMapping(value = "/addRole",method = RequestMethod.GET)
 	public String addRole(){
 		Role role = new Role();
-		role.setRole_name("Cop");
+		role.setRoleName("Cop");
 		roleService.addRole(role);
 		return "添加成功：" + role;
 	}
@@ -48,7 +47,7 @@ public class RoleController {
 	public String updateRole(){
 		Role role = new Role();
 		role.setId(5);
-		role.setRole_name("BusinessMan");
+		role.setRoleName("BusinessMan");
 		int result = roleService.updateRole(role);
 		if (result >= 1){
 			return "修改成功:" + role;

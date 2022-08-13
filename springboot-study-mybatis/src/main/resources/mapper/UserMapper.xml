@@ -12,7 +12,7 @@
  
 	<!--1.查询用户信息-->
 	<!--resultType的字段是返回信息的意思吗？ 因为查询用户我所返回的是一个对象，所以这里就应该写对象的绝对路径？-->
-	<select id="getUserInfo" resultType="com.example.springbootstudymybatis.pojo.User">
+	<select id="getUserInfo" resultMap="BaseResultMap">
 		SELECT * FROM user WHERE id = #{id}
 	</select>
 	

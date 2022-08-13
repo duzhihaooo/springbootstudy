@@ -2,7 +2,6 @@ package com.example.springbootstudymybatis.service.impl;
 
 import com.example.springbootstudymybatis.dao.RoleDao;
 import com.example.springbootstudymybatis.dao.UserDao;
-import com.example.springbootstudymybatis.dao.UserRoleDao;
 import com.example.springbootstudymybatis.pojo.Role;
 import com.example.springbootstudymybatis.pojo.Role_2NUser;
 import com.example.springbootstudymybatis.pojo.User;
@@ -61,7 +60,7 @@ public class RoleServiceImpl implements RoleService {
 		for (Role role:roleList){
 			Role_2NUser role_2NUser = new Role_2NUser();
 			role_2NUser.setId(role.getId());
-			role_2NUser.setRoleName(role.getRole_name());
+			role_2NUser.setRoleName(role.getRoleName());
 			//再将填写好的role_2NUser对象传入数组list_RU
 			list_RU.add(role_2NUser);
 			//将拿到的rid可以在表UserRole中找出对应的uid

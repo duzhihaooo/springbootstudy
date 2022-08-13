@@ -6,11 +6,11 @@
 	<!--与数据库中的字段相匹配-->
 	<resultMap id="BaseResultMap" type="com.example.springbootstudymybatis.pojo.Role">
 		<result column="id" jdbcType="INTEGER" property="id" />
-		<result column="role_name" jdbcType="VARCHAR" property="role_name"/>
+		<result column="role_name" jdbcType="VARCHAR" property="roleName"/>
 	</resultMap>
 	
 	<!--1.查询角色信息-->
-    <select id="getRoleInfo" resultType="com.example.springbootstudymybatis.pojo.Role">
+    <select id="getRoleInfo" resultMap="BaseResultMap">
 	    SELECT * FROM role WHERE id = #{id}
     </select>
 	
