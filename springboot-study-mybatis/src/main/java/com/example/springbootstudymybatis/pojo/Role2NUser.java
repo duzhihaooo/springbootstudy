@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role_2NUser {
+public class Role2NUser {
 	
 	private Integer id;
 	private String roleName;

@@ -1,7 +1,7 @@
 package com.example.springbootstudymybatis.service;
 
 import com.example.springbootstudymybatis.pojo.Role;
-import com.example.springbootstudymybatis.pojo.Role_2NUser;
+import com.example.springbootstudymybatis.pojo.Role2NUser;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public interface RoleService {
 	public List<Role> getAllRole();
 	
 	//查找一个角色对应多个用户
-	public List<Role_2NUser> getOneRole2NUsers();
+	public List<Role2NUser> getOneRole2NUsers();
 
 
 }

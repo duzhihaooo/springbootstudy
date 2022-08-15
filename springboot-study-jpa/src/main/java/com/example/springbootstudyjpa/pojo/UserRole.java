@@ -1,26 +1,23 @@
 package com.example.springbootstudyjpa.pojo;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "user")
-public class User {
-
+@Table(name = "nuser_1role")
+public class UserRole {
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //生成主键自增
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Column(name = "user_name")
-	private String userName;
-	
-	
-	
+	@Column(name = "user_id")
+	private Integer uid;
+	@Column(name = "role_id")
+	private Integer rid;
 }

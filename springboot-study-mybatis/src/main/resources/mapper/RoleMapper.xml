@@ -26,7 +26,7 @@
 			<if test="id != null">
 				id,
 			</if>
-			<if test="role_name != null">
+			<if test="roleName != null">
 				role_name
 			</if>
 		</trim>
@@ -34,8 +34,8 @@
 			<if test="id != null">
 				#{id,jdbcType=INTEGER},
 			</if>
-			<if test="role_name != null">
-				#{role_name,jdbcType=VARCHAR},
+			<if test="roleName != null">
+				#{roleName,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -44,15 +44,15 @@
 	<update id="updateRole" parameterType="int">
 		UPDATE role
 		<set>
-			<if test="role_name != null">
-				role_name = #{role_name,jdbcType=VARCHAR},
+			<if test="roleName != null">
+				role_name = #{roleName,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	
 	<!--5.查询所有角色信息-->
-	<select id="getAllRole" resultType="com.example.springbootstudymybatis.pojo.Role">
+	<select id="getAllRole" resultMap="BaseResultMap">
 		SELECT * FROM role;
 	</select>
 	

@@ -1,4 +1,4 @@
-package com.example.springbootstudymybatis.pojo;
+package com.example.springbootstudyjpa.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,9 +9,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User_2NRoles {
+public class Role2NUsers {
 	private Integer id;
-	private String userName;
-	List<Role> roleList;
-	
+	private String roleName;
+	List<User> userList;
 }

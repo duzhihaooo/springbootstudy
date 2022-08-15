@@ -4,8 +4,7 @@ import com.example.springbootstudymybatis.dao.RoleDao;
 import com.example.springbootstudymybatis.dao.UserDao;
 import com.example.springbootstudymybatis.pojo.Role;
 import com.example.springbootstudymybatis.pojo.User;
-import com.example.springbootstudymybatis.pojo.UserRole;
-import com.example.springbootstudymybatis.pojo.User_2NRoles;
+import com.example.springbootstudymybatis.pojo.User2NRoles;
 import com.example.springbootstudymybatis.service.UserRoleService;
 import com.example.springbootstudymybatis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,24 +48,24 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	//查询所有用户信息
+	@Override
 	public List<User> getAllUser(){
 		return userDao.getAllUser();
 	}
 	
 	//查找一个用户对应多个角色
 	@Override
-	public List<User_2NRoles> getOneUser2NRoles(){
+	public List<User2NRoles> getOneUser2NRoles(){
 		//新建一个User_2NRoles数组用来收集user的信息
-		List<User_2NRoles> list_UR = new ArrayList<>();
+		List<User2NRoles> list_UR = new ArrayList<>();
 		//遍历所有用户，再遍历过程中将每一个用户信息传入User_2NRoles对象里
 		for (User user:getAllUser()){
-			User_2NRoles user_2NRoles = new User_2NRoles();
-			user_2NRoles.setId(user.getId());
-			user_2NRoles.setUserName(user.getUser_name());
+			User2NRoles user2NRoles = new User2NRoles();
+			user2NRoles.setId(user.getId());
+			user2NRoles.setUserName(user.getUserName());
 			//再将传好的user_2NRoles对象传入数组list_UR
-			list_UR.add(user_2NRoles);
 			//拿到了用户信息，此时应该在UserRole用户角色关联表中以uid拿到rid
-			List<Integer> roleIdList = userRoleService.getRoleIdListByUserId(user_2NRoles.getId());
+			List<Integer> roleIdList = userRoleService.getRoleIdListByUserId(user2NRoles.getId());
 			
 			//拿到对应角色id的集合后，将其遍历再在role表中拿到与其对应的roleName
 			List<Role> roleList = new ArrayList<>();
@@ -76,9 +75,9 @@ public class UserServiceImpl implements UserService {
 			}
 			
 			//再将拿到的对应角色集合再添加到对象user_2NRoles里
-			user_2NRoles.setRoleList(roleList);
+			user2NRoles.setRoleList(roleList);
 			//再将填写完整的user_2NRoles对象传入list_UR数组中
-			list_UR.add(user_2NRoles);
+			list_UR.add(user2NRoles);
 		}
 		return list_UR;
 	}

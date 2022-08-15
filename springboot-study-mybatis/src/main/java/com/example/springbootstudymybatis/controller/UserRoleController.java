@@ -36,8 +36,8 @@ public class UserRoleController {
 	public String  addUserRole(){
 		UserRole userRole = new UserRole();
 		//userRole.setId(16);
-		userRole.setUser_id(10);
-		userRole.setRole_id(10);
+		userRole.setUserId(10);
+		userRole.setRoleId(10);
 		userRoleService.addUserRole(userRole);
 		return "添加用户角色对应关系成功：" + userRole;
 	}
@@ -47,8 +47,8 @@ public class UserRoleController {
 	public String updateUserRole(){
 		UserRole userRole = new UserRole();
 		userRole.setId(14);
-		userRole.setUser_id(9);
-		userRole.setRole_id(9);
+		userRole.setUserId(9);
+		userRole.setRoleId(9);
 		int result = userRoleService.updateUserRole(userRole);
 		
 		if (result >= 1){

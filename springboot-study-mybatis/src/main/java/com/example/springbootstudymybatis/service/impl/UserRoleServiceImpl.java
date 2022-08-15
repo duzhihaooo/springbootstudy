@@ -47,7 +47,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 		List<UserRole> list1 = userRoleDao.getRoleIdListByUserId(id);
 		List<Integer> list2 = new ArrayList<>();
 		for (UserRole userRole:list1){
-			list2.add(userRole.getRole_id());
+			list2.add(userRole.getRoleId());
 		}
 		return list2;
 	}
@@ -58,7 +58,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 		List<UserRole> list1 = userRoleDao.getUserIdListByRoleId(id);
 		List<Integer> list2 = new ArrayList<>();
 		for (UserRole userRole:list1){
-			list2.add(userRole.getRole_id());
+			list2.add(userRole.getRoleId());
 		}
 		return list2;
 	}

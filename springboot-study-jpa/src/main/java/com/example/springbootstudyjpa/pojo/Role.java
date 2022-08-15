@@ -3,8 +3,8 @@ package com.example.springbootstudyjpa.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 import org.hibernate.annotations.Table;
 
 @Data
@@ -12,8 +12,10 @@ import org.hibernate.annotations.Table;
 public class Role {
 	
 	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //生成主键自增
 	private Integer id;
+	@Column(name = "role_name")
 	private String roleName;
-	private Integer userId;
 
 }

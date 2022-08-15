@@ -1,8 +1,7 @@
 package com.example.springbootstudymybatis.service;
 
 import com.example.springbootstudymybatis.pojo.User;
-import com.example.springbootstudymybatis.pojo.UserRole;
-import com.example.springbootstudymybatis.pojo.User_2NRoles;
+import com.example.springbootstudymybatis.pojo.User2NRoles;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ public interface UserService {
 	//查询所有用户信息
 	public List<User> getAllUser();
 	
-	//
-	public List<User_2NRoles> getOneUser2NRoles();
+	//查找一个用户对应多个角色
+	public List<User2NRoles> getOneUser2NRoles();
 	
 }

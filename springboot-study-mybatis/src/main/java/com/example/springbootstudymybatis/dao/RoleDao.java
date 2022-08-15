@@ -12,6 +12,13 @@ public interface RoleDao {
 	Role getRoleInfo(int id);
 	
 	//删除角色
+	
+	/**
+	 *
+	 * @param id id
+	 * @return
+	 */
+	
 	int deleteRole(int id);
 	
 	//新增角色

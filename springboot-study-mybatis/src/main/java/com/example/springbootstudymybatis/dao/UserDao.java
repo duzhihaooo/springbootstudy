@@ -22,6 +22,7 @@ public interface UserDao {
 	//查询所有用户信息
 	List<User> getAllUser();
 	
+	
 	//
 	
 }

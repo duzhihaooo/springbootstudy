@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class UserRole extends User{
 
 	private Integer id;
-	private Integer user_id;
-	private Integer role_id;
+	private Integer userId;
+	private Integer roleId;
 
 }

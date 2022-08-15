@@ -7,9 +7,9 @@
 	<!--与数据库中的字段相匹配-->
 	<resultMap id="BaseResultMap" type="com.example.springbootstudymybatis.pojo.User">
 		<result column="id" jdbcType="INTEGER" property="id" />
-		<result column="user_name" jdbcType="VARCHAR" property="user_name" />
+		<result column="user_name" jdbcType="VARCHAR" property="userName" />
 	</resultMap>
- 
+
 	<!--1.查询用户信息-->
 	<!--resultType的字段是返回信息的意思吗？ 因为查询用户我所返回的是一个对象，所以这里就应该写对象的绝对路径？-->
 	<select id="getUserInfo" resultMap="BaseResultMap">
@@ -25,13 +25,16 @@
 	<!--3.新增用户-->
 	<!--对xml文件里的resultType字段和parameterType不太明白-->
 	<!--在xml文件中，新增用户方法这里，我这里传进来的是个User对象，但在sql语句里，可以直接拿到id，user_name 是不是因为getset方法-->
-	<insert id="addUser"	parameterType="int">
+	<insert id="addUser"	parameterType="int" >
+		/*
+			insert into user (id,uerName) values (5,"bb");
+		*/
 		INSERT INTO user
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				id,
 			</if>
-			<if test="user_name != null">
+			<if test="userName != null">
 				user_name
 			</if>
 		</trim>
@@ -39,8 +42,8 @@
 			<if test="id != null">
 				#{id,jdbcType=INTEGER},
 			</if>
-			<if test="user_name != null">
-				#{user_name,jdbcType=VARCHAR},
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -49,15 +52,15 @@
 	<update id="updateUser" parameterType="int">
 		UPDATE user
 		<set>
-			<if test="user_name != null">
-				user_name = #{user_name,jdbcType=VARCHAR},
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	
 	<!--5.查询所有用户信息-->
-	<select id="getAllUser" resultType="com.example.springbootstudymybatis.pojo.User">
+	<select id="getAllUser" resultMap="BaseResultMap">
 		SELECT * FROM user;
 	</select>
  </mapper>

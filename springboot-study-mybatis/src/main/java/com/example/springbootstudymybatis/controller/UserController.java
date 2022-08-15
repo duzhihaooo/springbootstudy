@@ -1,18 +1,14 @@
 package com.example.springbootstudymybatis.controller;
 
 import com.example.springbootstudymybatis.pojo.User;
-import com.example.springbootstudymybatis.pojo.UserRole;
-import com.example.springbootstudymybatis.pojo.User_2NRoles;
+import com.example.springbootstudymybatis.pojo.User2NRoles;
 import com.example.springbootstudymybatis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 @RestController
 
@@ -44,7 +40,7 @@ public class UserController {
 		User user = new User();
 		//user.setId(18);
 		//好像不用像mybatis-plus需要再实体类中设置Id主键自增，可以实现添加自动自增
-		user.setUser_name("Kid Mili");
+		user.setUserName("Kristen");
 		//数据库能够添加成功，但是网页显示报错
 		//Console：Mapper method 'com.example.springbootstudymybatis.dao.UserDao.addUser' has an unsupported return type: class com.example.springbootstudymybatis.pojo.User] with root cause
 		int result = userService.addUser(user);
@@ -60,7 +56,7 @@ public class UserController {
 	public String updateUser(){
 		User user = new User();
 		user.setId(9);
-		user.setUser_name("HelloKitty");
+		user.setUserName("HelloKitty");
 		int result = userService.updateUser(user);
 		if(result >= 1 ){
 			return "修改成功:"+user;
@@ -78,7 +74,7 @@ public class UserController {
 	
 	//查找一个用户对应多个角色
 	@RequestMapping(value = "/getOneUser2NRoles",method = RequestMethod.GET)
-	public List<User_2NRoles> getOneUser2NRoles(){
+	public List<User2NRoles> getOneUser2NRoles(){
 		return userService.getOneUser2NRoles();
 	}
 	
