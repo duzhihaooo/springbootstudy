@@ -48,6 +48,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 	
 	@Override
 	public List<Integer> findUidByRid(final int id) {
+		
 		List<Integer> list = userRoleRepository.findUidByRid(id);
 		return list;
 	}

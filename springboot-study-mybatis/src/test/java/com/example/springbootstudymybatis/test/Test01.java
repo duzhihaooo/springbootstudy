@@ -14,8 +14,8 @@ public class Test01 {
 	
 	@Test
 	public void test01(){
-		List<User> list = userDao.getAllUserTest();
-		System.out.println(list);
+		//List<User> list = userDao.getAllUserTest();
+		//System.out.println(list);
 	}
 	
 	

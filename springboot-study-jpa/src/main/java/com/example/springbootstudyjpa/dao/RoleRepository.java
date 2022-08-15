@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-
+//todo 使用@Repository
 public interface RoleRepository extends JpaRepository<Role, Integer> {
 	//基于@Query注解查询
 	@Query(value = "select * from role where role_name = ?",nativeQuery = true)

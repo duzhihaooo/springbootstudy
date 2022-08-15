@@ -6,7 +6,6 @@ import com.example.springbootstudyjpa.dao.UsersRepositoryByName;
 import com.example.springbootstudyjpa.pojo.Role;
 import com.example.springbootstudyjpa.pojo.User;
 import com.example.springbootstudyjpa.pojo.User2NRoles;
-import com.example.springbootstudyjpa.service.RoleService;
 import com.example.springbootstudyjpa.service.UserRoleService;
 import com.example.springbootstudyjpa.service.UserService;
 import org.springframework.stereotype.Service;
@@ -15,6 +14,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,17 +33,17 @@ public class UserServiceImpl implements UserService {
 		Optional<User> list = userRepository.findById(id);
 		return list.get();
 	}
-	
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public void deleteUser(Integer id) {
 		userRepository.deleteById(id);
 	}
-	
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public User addUser(final User user) {
 		return userRepository.save(user);
 	}
-	
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public void updateUser(final User user) {
 		userRepository.save(user);
@@ -66,7 +66,8 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public List<User> queryByNameUseSQL(String str){
-		return userRepository.queryByNameUseSQL(str);
+		//return userRepository.queryByNameUser(str);
+		return null;
 	}
 	
 	/*
@@ -102,7 +103,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User getUserbyId(final int id) {
-		return userRepository.getUserbyId(id);
+	public User getUserById(final int id) {
+		return userRepository.findById(id).orElse(null);
 	}
 }

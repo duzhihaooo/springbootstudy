@@ -3,7 +3,6 @@ package com.example.springbootstudyjpa.service;
 import com.example.springbootstudyjpa.pojo.User;
 import com.example.springbootstudyjpa.pojo.User2NRoles;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 public interface UserService {
@@ -49,7 +48,7 @@ public interface UserService {
 	//查找一个用户对应多个角色
 	List<User2NRoles> findUser2NRoles();
 	
-	User getUserbyId(int id);
+	User getUserById(int id);
 	
 	
 	
