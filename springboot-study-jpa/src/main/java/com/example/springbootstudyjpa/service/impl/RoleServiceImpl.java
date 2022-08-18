@@ -1,15 +1,13 @@
 package com.example.springbootstudyjpa.service.impl;
 
 import com.example.springbootstudyjpa.dao.RoleRepository;
-import com.example.springbootstudyjpa.dao.RoleRepositoryByName;
 import com.example.springbootstudyjpa.dao.UserRepository;
+import com.example.springbootstudyjpa.dao.UserRoleRepository;
 import com.example.springbootstudyjpa.pojo.Role;
 import com.example.springbootstudyjpa.pojo.Role2NUsers;
 import com.example.springbootstudyjpa.pojo.User;
-import com.example.springbootstudyjpa.pojo.User2NRoles;
 import com.example.springbootstudyjpa.service.RoleService;
 import com.example.springbootstudyjpa.service.UserRoleService;
-import com.example.springbootstudyjpa.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,9 +20,7 @@ public class RoleServiceImpl implements RoleService {
 	@Resource
 	RoleRepository roleRepository;
 	@Resource
-	RoleRepositoryByName roleRepositoryByName;
-	@Resource
-	UserRoleService userRoleService;
+	UserRoleRepository userRoleRepository;
 	@Resource
 	UserRepository userRepository;
 	
@@ -32,8 +28,7 @@ public class RoleServiceImpl implements RoleService {
 	// TODO: 2022/8/15 :JpaRepository仓库中的findById方法返回的是Optional<T> Optional这个不太懂
 	@Override
 	public Role getRoleInfo(int id){
-		Optional<Role> list = roleRepository.findById(id);
-		return list.get();
+		return roleRepository.findById(id).orElse(null);
 	}
 	
 	@Override
@@ -58,22 +53,12 @@ public class RoleServiceImpl implements RoleService {
 	
 	@Override
 	public List<Role> findByRoleName(String name){
-	    return roleRepositoryByName.findByRoleName(name);
+	    return roleRepository.findByRoleName(name);
 	}
 	
 	@Override
 	public List<Role> findByRoleNameLike(String name){
-		return roleRepositoryByName.findByRoleNameLike(name);
-	}
-	
-	@Override
-	public List<Role> queryByRoleName(String name){
-		return roleRepository.queryByRoleName(name);
-	}
-	
-	@Override
-	public Role getRolebyId(int id){
-		return roleRepository.getRolebyId(id);
+		return roleRepository.findByRoleNameLike(name);
 	}
 	
 	@Override
@@ -85,12 +70,12 @@ public class RoleServiceImpl implements RoleService {
 			role2NUsers.setId(role.getId());
 			role2NUsers.setRoleName(role.getRoleName());
 			//通过拿到的rid，可以在userrole表中拿到对应的userId集合
-			List<Integer> userIdList = userRoleService.findUidByRid(role2NUsers.getId());
+			List<Integer> userIdList = userRoleRepository.findUidByRid(role2NUsers.getId());
 			List<User> userList =new ArrayList<>();
 			//再将所拿到的对应的userIdList遍历，在user表中，通过uid得到对应的user信息
 			for (Integer id:userIdList){
 				User user = new User();
-				user = userRepository.getUserbyId(id);
+				user = userRepository.findById(id).orElse(null);
 				userList.add(user);
 			}
 			role2NUsers.setUserList(userList);

@@ -2,11 +2,10 @@ package com.example.springbootstudyjpa.service.impl;
 
 import com.example.springbootstudyjpa.dao.RoleRepository;
 import com.example.springbootstudyjpa.dao.UserRepository;
-import com.example.springbootstudyjpa.dao.UsersRepositoryByName;
+import com.example.springbootstudyjpa.dao.UserRoleRepository;
 import com.example.springbootstudyjpa.pojo.Role;
 import com.example.springbootstudyjpa.pojo.User;
 import com.example.springbootstudyjpa.pojo.User2NRoles;
-import com.example.springbootstudyjpa.service.RoleService;
 import com.example.springbootstudyjpa.service.UserRoleService;
 import com.example.springbootstudyjpa.service.UserService;
 import org.springframework.stereotype.Service;
@@ -22,16 +21,13 @@ public class UserServiceImpl implements UserService {
 	@Resource
 	UserRepository userRepository;
 	@Resource
-	UsersRepositoryByName usersRepositoryByName;
-	@Resource
-	UserRoleService userRoleService;
+	UserRoleRepository userRoleRepository;
 	@Resource
 	RoleRepository roleRepository;
 	
 	@Override
 	public User getUserInfo(Integer id) {
-		Optional<User> list = userRepository.findById(id);
-		return list.get();
+		return userRepository.findById(id).orElse(null);
 	}
 	
 	@Override
@@ -56,25 +52,13 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public List<User> findByUserName(String str){
-		return usersRepositoryByName.findByUserName(str);
+		return userRepository.findByUserName(str);
 	}
 	
 	@Override
 	public List<User> findByUserNameLike(String str){
-		return usersRepositoryByName.findByUserNameLike(str);
+		return userRepository.findByUserNameLike(str);
 	}
-	
-	@Override
-	public List<User> queryByNameUseSQL(String str){
-		return userRepository.queryByNameUseSQL(str);
-	}
-	
-	/*
-	@Override
-	public void updateUsersNameById(String name,String id){
-		userRepository.updateUsersNameById(name,id);
-	}
-	*/
 	
 	@Override
 	public List<User2NRoles> findUser2NRoles() {
@@ -85,13 +69,12 @@ public class UserServiceImpl implements UserService {
 			user2NRoles.setId(user.getId());
 			user2NRoles.setUserName(user.getUserName());
 			//通过uid在userrole关联表中拿到与其对应的rid集合
-			List<Integer> roleIdList = userRoleService.findRidByUid(user2NRoles.getId());
+			List<Integer> roleIdList = userRoleRepository.findRidByUid(user2NRoles.getId());
 			List<Role> roleList = new ArrayList<>();
 			//再通过拿到的roleList集合，将其遍历在Role表中得到向对应rid的role信息
 			for (int id:roleIdList){
 				Role role = new Role();
-				//role = roleService.getRoleInfo(id);
-				role = roleRepository.getRolebyId(id);
+				role = roleRepository.findById(id).orElse(null);
 				roleList.add(role);
 			}
 			//拿到与其对应的多个role信息集合，再将其传回user2Nroles对象中
@@ -99,10 +82,5 @@ public class UserServiceImpl implements UserService {
 			list_UR.add(user2NRoles);
 		}
 		return list_UR;
-	}
-	
-	@Override
-	public User getUserbyId(final int id) {
-		return userRepository.getUserbyId(id);
 	}
 }

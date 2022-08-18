@@ -33,8 +33,4 @@ public interface UserRoleService {
 	 */
 	public List<UserRole> getAllUserRole();
 	
-	//通过传入的rid拿到对应的uid
-	public List<Integer> findRidByUid(int id);
-	//通过传入的uid拿到对应的rid
-	public List<Integer> findUidByRid(int id);
 }

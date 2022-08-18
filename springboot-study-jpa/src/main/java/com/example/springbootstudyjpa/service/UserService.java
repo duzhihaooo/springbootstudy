@@ -38,18 +38,11 @@ public interface UserService {
 	 */
 	public List<User> findByUserName(String str);
 	public List<User> findByUserNameLike(String str);
-	/**
-	 * 基于@Query注解查询与更新
-	 */
-	public List<User> queryByNameUseSQL(String str);
-	 /*//取消自动回滚
-	public void updateUsersNameById(String name,String id);
-	*/
 	
 	//查找一个用户对应多个角色
 	List<User2NRoles> findUser2NRoles();
 	
-	User getUserbyId(int id);
+
 	
 	
 	

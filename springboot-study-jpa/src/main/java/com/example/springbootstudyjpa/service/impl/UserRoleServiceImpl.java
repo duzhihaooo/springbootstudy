@@ -16,8 +16,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 	
 	@Override
 	public UserRole getUserRoleInfo(final int id) {
-		Optional<UserRole> list = userRoleRepository.findById(id);
-		return list.get();
+		return userRoleRepository.findById(id).orElse(null);
 	}
 	
 	@Override
@@ -38,18 +37,6 @@ public class UserRoleServiceImpl implements UserRoleService {
 	@Override
 	public List<UserRole> getAllUserRole() {
 		return userRoleRepository.findAll();
-	}
-	
-	@Override
-	public List<Integer> findRidByUid(final int id) {
-		List<Integer> list = userRoleRepository.findRidByUid(id);
-		return list;
-	}
-	
-	@Override
-	public List<Integer> findUidByRid(final int id) {
-		List<Integer> list = userRoleRepository.findUidByRid(id);
-		return list;
 	}
 	
 }

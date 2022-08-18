@@ -36,12 +36,7 @@ public interface RoleService {
 	 */
 	public List<Role> findByRoleName(String name);
 	public List<Role> findByRoleNameLike(String name);
-	/**
-	 * 基于@Query注解查询
-	 */
-	public List<Role> queryByRoleName(String name);
 	
-	public Role getRolebyId(int id);
 	
 	//查询一个角色对应多个用户
 	public List<Role2NUsers> findRole2NUsers();
