@@ -9,9 +9,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories
 @SpringBootApplication
 public class SpringbootStudyJpaApplication {
-	
-	public static void main(String[] args) {
-		SpringApplication.run(SpringbootStudyJpaApplication.class, args);
-	}
-	
+    
+    public static void main(String[] args) {
+        SpringApplication.run(SpringbootStudyJpaApplication.class, args);
+    }
+    
 }

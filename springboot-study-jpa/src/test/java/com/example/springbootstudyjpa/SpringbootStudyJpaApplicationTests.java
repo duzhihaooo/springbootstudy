@@ -1,13 +1,9 @@
 package com.example.springbootstudyjpa;
 
 import com.example.springbootstudyjpa.dao.UserRepository;
-import java.util.Optional;
-import org.hibernate.SessionFactory;
-import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
