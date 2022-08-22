@@ -2,9 +2,11 @@ package com.example.springbootstudymybatis.service.impl;
 
 import com.example.springbootstudymybatis.dao.RoleDao;
 import com.example.springbootstudymybatis.dao.UserDao;
+import com.example.springbootstudymybatis.dao.UserRoleDao;
 import com.example.springbootstudymybatis.pojo.Role;
 import com.example.springbootstudymybatis.pojo.User;
 import com.example.springbootstudymybatis.pojo.User2NRoles;
+import com.example.springbootstudymybatis.pojo.UserRole;
 import com.example.springbootstudymybatis.service.UserRoleService;
 import com.example.springbootstudymybatis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	RoleDao roleDao;
 	@Autowired
-	UserRoleService userRoleService;
+	UserRoleDao userRoleDao;
 	
 	//查找用户
 	@Override
@@ -65,7 +67,11 @@ public class UserServiceImpl implements UserService {
 			user2NRoles.setUserName(user.getUserName());
 			//再将传好的user_2NRoles对象传入数组list_UR
 			//拿到了用户信息，此时应该在UserRole用户角色关联表中以uid拿到rid
-			List<Integer> roleIdList = userRoleService.getRoleIdListByUserId(user2NRoles.getId());
+			List<UserRole> list1 = userRoleDao.getRoleIdListByUserId(user2NRoles.getId());
+			List<Integer> roleIdList = new ArrayList<>();
+			for (UserRole userRole:list1){
+				roleIdList.add(userRole.getRoleId());
+			}
 			
 			//拿到对应角色id的集合后，将其遍历再在role表中拿到与其对应的roleName
 			List<Role> roleList = new ArrayList<>();

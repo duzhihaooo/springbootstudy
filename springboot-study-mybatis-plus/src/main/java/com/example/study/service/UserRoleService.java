@@ -28,7 +28,7 @@ public interface UserRoleService extends IService<UserRole> {
     public int add(UserRole userRole);
     
     //删除
-    public int delete(UserRole userRole);
+    public int delete(int id);
    
     //修改
     public int update(UserRole userRole);

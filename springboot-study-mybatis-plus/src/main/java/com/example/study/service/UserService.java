@@ -21,6 +21,6 @@ public interface UserService extends IService<User> {
 	public int update(User user);
 	
 	//删除用户
-	public int delete(User user);
+	public int delete(int id);
 	
 }

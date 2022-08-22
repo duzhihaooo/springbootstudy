@@ -4,28 +4,54 @@ import com.example.springbootstudymybatis.pojo.Role;
 import com.example.springbootstudymybatis.pojo.Role2NUser;
 import com.example.springbootstudymybatis.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/role")    //todo:这里的role不就是和jpa项目中的role冲突了吗
 public class RoleController {
 	
 	@Autowired
 	RoleService roleService;
 	
-	//查找指定角色
-	@RequestMapping(value = "getRoleInfo",method = RequestMethod.GET)
-	public Role getRoleInfo(){
-		return roleService.getRoleInfo(6);
+	/**
+	 * 根据id 查找角色
+	 * @return
+	 */
+	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
+	public Role getRoleInfo(@PathVariable int id){
+		
+		return roleService.getRoleInfo(id);
 	}
 	
-	//删除角色
-	@RequestMapping(value = "/deleteRole",method = RequestMethod.GET)
-	public String deleteRole(){
-		int result = roleService.deleteRole(2);
+	/**
+	 * 查询所有角色信息
+	 * @return
+	 */
+	@RequestMapping(value = "",method = RequestMethod.GET)
+	public List<Role> getAllRole(){
+		return roleService.getAllRole();
+	}
+	
+	/**
+	 * 查找一个角色对应多个用户
+	 * @return
+	 */
+	@RequestMapping(value = "/one-role-n-users",method = RequestMethod.GET)
+	public List<Role2NUser> getOneRole2NUsers(){
+		
+		return roleService.getOneRole2NUsers();
+	}
+	
+	
+	/**
+	 * 根据id 删除角色
+	 * @return
+	 */
+	@RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+	public String deleteRole(@PathVariable int id){
+		int result = roleService.deleteRole(id);
 		if (result >= 1){
 			return "删除成功";
 		} else {
@@ -33,39 +59,28 @@ public class RoleController {
 		}
 	}
 	
-	//新增角色
-		@RequestMapping(value = "/addRole",method = RequestMethod.GET)
-	public String addRole(){
-		Role role = new Role();
-		role.setRoleName("PoliceWoman");
+	/**
+	 * 新增角色
+	 * @return
+	 */
+	@RequestMapping(value = "/",method = RequestMethod.POST)
+	public String addRole(@RequestBody Role role){
 		roleService.addRole(role);
 		return "添加成功：" + role;
 	}
 	
-	//修改角色
-	@RequestMapping(value = "/updateRole",method = RequestMethod.GET)
-	public String updateRole(){
-		Role role = new Role();
-		role.setId(5);
-		role.setRoleName("BusinessMan");
+	/**
+	 * 修改角色
+	 * @return
+	 */
+	@RequestMapping(value = "/",method = RequestMethod.PUT)
+	public String updateRole(@RequestBody Role role){
 		int result = roleService.updateRole(role);
 		if (result >= 1){
 			return "修改成功:" + role;
 		} else {
 			return "修改失败";
 		}
-	}
-	
-	//查询所有角色信息
-	@RequestMapping(value = "/getAllRole",method = RequestMethod.GET)
-	public List<Role> getAllRole(){
-		return roleService.getAllRole();
-	}
-	
-	//查找一个角色对应多个用户
-	@RequestMapping(value = "/getOneRole2NUsers",method = RequestMethod.GET)
-	public List<Role2NUser> getOneRole2NUsers(){
-		return roleService.getOneRole2NUsers();
 	}
 	
 	

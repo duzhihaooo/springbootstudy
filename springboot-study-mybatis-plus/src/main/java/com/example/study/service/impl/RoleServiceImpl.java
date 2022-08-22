@@ -74,26 +74,23 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
     
     //添加一个用户
+    @Override
     public int add(Role role) {
         //添加一个用户返回的是一条数据，所以用int接收
-        int row = roleMapper.insert(role);
-        System.out.println(row);
-        return row;
+        return roleMapper.insert(role);
     }
     
     //2.删除一个用户
-    public int delete(Role role){
+    @Override
+    public int delete(int id){
         //删除一个用户所返回的是执行一条数据1，所以用int接收
-        int row = roleMapper.deleteById(role);
-        System.out.println(row);
-        return row;
+        return roleMapper.deleteById(id);
     }
     
     //3.修改一个用户
+    @Override
     public int update(Role role){
         //修改一个用户所返回的是执行一条数据1，所以用int接收
-        int row = roleMapper.updateById(role);
-      
-        return row;
+        return roleMapper.updateById(role);
     }
 }

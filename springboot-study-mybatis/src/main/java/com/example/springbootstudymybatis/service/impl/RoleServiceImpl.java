@@ -6,6 +6,7 @@ import com.example.springbootstudymybatis.dao.UserRoleDao;
 import com.example.springbootstudymybatis.pojo.Role;
 import com.example.springbootstudymybatis.pojo.Role2NUser;
 import com.example.springbootstudymybatis.pojo.User;
+import com.example.springbootstudymybatis.pojo.UserRole;
 import com.example.springbootstudymybatis.service.RoleService;
 import com.example.springbootstudymybatis.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,7 @@ public class RoleServiceImpl implements RoleService {
 	@Autowired
 	UserDao userDao;
 	@Autowired
-	//在Service层中可以调用另外Service实现层中的方法！！！
-	UserRoleService userRoleService;
+	UserRoleDao userRoleDao;
 	
 	//查询指定用户
 	@Override
@@ -73,8 +73,11 @@ public class RoleServiceImpl implements RoleService {
 		
 			//将拿到的rid可以在表UserRole中找出对应的uid
 			//此时拿到的是对应rid的uid集合
-			List<Integer> userIdList = userRoleService.getUserIdListByRoleId(role2NUser.getId());
-			
+			List<UserRole> list1 = userRoleDao.getUserIdListByRoleId(role2NUser.getId());
+			List<Integer> userIdList = new ArrayList<>();
+			for (UserRole userRole:list1){
+				userIdList.add(userRole.getUserId());
+			}
 			List<User> userList = new ArrayList<>();
 			//拿到uid之后，可以在表User中拿到对应的User信息
 			for (Integer id:userIdList){

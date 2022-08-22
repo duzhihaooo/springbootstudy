@@ -4,7 +4,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "roleName": "admin"
+  "roleName": "admin55"
 }
 
 ###
@@ -26,5 +26,19 @@ GET http://localhost:8080/role
 Accept: application/json
 
 ###
-GET http://localhost:8080/getRole/18
+POST http://localhost:8080/role/add-user-n-roles
 Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 1,
+  "userName": "7kk",
+  "roleList": [
+	{
+	  "roleName": "scientist"
+	},
+	{
+	  "roleName": "gymnast"
+	}
+  ]
+}

@@ -1,5 +1,8 @@
 package com.example.springbootstudyjpa.service;
 
+import com.example.springbootstudyjpa.pojo.Role;
+import com.example.springbootstudyjpa.pojo.User;
+import com.example.springbootstudyjpa.pojo.User2NRoles;
 import com.example.springbootstudyjpa.pojo.UserRole;
 import java.util.List;
 
@@ -36,5 +39,10 @@ public interface UserRoleService {
      * 查找所有用户角色关系
      */
     public List<UserRole> getAllUserRole();
+    
+    public User2NRoles addUserAddRole(User2NRoles user2NRoles);
+    
+    
+    
     
 }

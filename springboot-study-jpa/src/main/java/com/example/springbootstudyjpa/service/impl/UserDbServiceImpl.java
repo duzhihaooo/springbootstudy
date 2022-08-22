@@ -6,14 +6,15 @@ import com.example.springbootstudyjpa.dao.UserRoleRepository;
 import com.example.springbootstudyjpa.pojo.Role;
 import com.example.springbootstudyjpa.pojo.User;
 import com.example.springbootstudyjpa.pojo.User2NRoles;
-import com.example.springbootstudyjpa.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
+
+import com.example.springbootstudyjpa.service.UserDbService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserDbServiceImpl implements UserDbService {
     //导入dao层接口
     @Resource
     UserRepository     userRepository;

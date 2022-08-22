@@ -1,10 +1,11 @@
 package com.example.springbootstudyjpa.controller;
 
-import com.example.springbootstudyjpa.pojo.Role;
-import com.example.springbootstudyjpa.pojo.Role2NUsers;
+import com.example.springbootstudyjpa.pojo.*;
 import com.example.springbootstudyjpa.service.RoleService;
 import java.util.List;
 import javax.annotation.Resource;
+
+import com.example.springbootstudyjpa.service.UserRoleService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,17 @@ public class RoleController {
     @Resource
     RoleService roleService;
     
+    @Resource
+    UserRoleService userRoleService;
+    
+    /**
+     * 添加user的同时添加role
+     * 在userRole中实施关联
+     */
+    @RequestMapping(value = "/add-user-n-roles",method = RequestMethod.POST)
+    public User2NRoles addUserAddRole(@RequestBody User2NRoles user2NRoles){
+        return userRoleService.addUserAddRole(user2NRoles);
+    }
     /**
      * 根据 id 获取 role
      *

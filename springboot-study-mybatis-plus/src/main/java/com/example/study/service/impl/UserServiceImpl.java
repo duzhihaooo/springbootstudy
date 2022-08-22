@@ -101,9 +101,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 	
 	//删除用户
 	@Override
-	public int delete(User user){
-		int id = userMapper.deleteById(user);
-		return id;
+	public int delete(int id){
+		return userMapper.deleteById(id);
 	}
 	
 

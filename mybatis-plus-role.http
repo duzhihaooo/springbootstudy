@@ -1,0 +1,31 @@
+###
+GET http://localhost:8080/role
+Accept: application/json
+
+###
+POST http://localhost:8080/role/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "roleName": "chef"
+}
+
+###
+PUT http://localhost:8080/role/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 18,
+  "roleName": "consumer"
+}
+
+###
+DELETE http://localhost:8080/role
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 20
+}

@@ -3,27 +3,42 @@ package com.example.springbootstudymybatis.controller;
 import com.example.springbootstudymybatis.pojo.UserRole;
 import com.example.springbootstudymybatis.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/user-role")
 public class UserRoleController {
 	@Autowired
 	UserRoleService userRoleService;
 	
-	//查询指定用户角色对应关系
-	@RequestMapping(value = "/getUserRoleInfo",method = RequestMethod.GET)
-	public UserRole getUserRoleInfo(){
-		return userRoleService.getUserRoleInfo(5);
+	/**
+	 * 查询指定用户角色对应关系
+	 * @return
+	 */
+	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
+	public UserRole getUserRoleInfo(@PathVariable int id){
+		
+		return userRoleService.getUserRoleInfo(id);
+	}
+	/**
+	 * 查询所有用户角色对应关系信息
+	 * @return
+	 */
+	//todo:查询结果有一个userName字段 没找出哪里来的
+	@RequestMapping(value = "/",method = RequestMethod.GET)
+	public List<UserRole> getAllUserRole(){
+		return userRoleService.getAllUserRole();
 	}
 	
-	//删除用户角色对应关系
-	@RequestMapping(value = "/deleteUserRole",method = RequestMethod.GET)
-	public String deleteUserRole(){
-		int result = userRoleService.deleteUserRole(2);
+	/**
+	 * 根据id 删除用户角色对应关系
+	 * @return
+	 */
+	@RequestMapping(value = "/",method = RequestMethod.DELETE)
+	public String deleteUserRole(@PathVariable int id){
+		int result = userRoleService.deleteUserRole(id);
 		if (result >= 1){
 			return "删除成功";
 		} else {
@@ -31,26 +46,23 @@ public class UserRoleController {
 		}
 	}
 	
-	//新增用户角色对应关系
-	@RequestMapping(value = "/addUserRole",method = RequestMethod.GET)
-	public String  addUserRole(){
-		UserRole userRole = new UserRole();
-		//userRole.setId(16);
-		userRole.setUserId(10);
-		userRole.setRoleId(10);
+	/**
+	 * 新增用户角色对应关系
+	 * @return
+	 */
+	@RequestMapping(value = "/",method = RequestMethod.POST)
+	public String  addUserRole(@RequestBody UserRole userRole){
 		userRoleService.addUserRole(userRole);
 		return "添加用户角色对应关系成功：" + userRole;
 	}
 	
-	//修改用户角色对应关系
-	@RequestMapping(value = "/updateUserRole",method = RequestMethod.GET)
-	public String updateUserRole(){
-		UserRole userRole = new UserRole();
-		userRole.setId(14);
-		userRole.setUserId(9);
-		userRole.setRoleId(9);
+	/**
+	 * 修改用户角色对应关系
+	 * @return
+	 */
+	@RequestMapping(value = "/",method = RequestMethod.PUT)
+	public String updateUserRole(@RequestBody UserRole userRole){
 		int result = userRoleService.updateUserRole(userRole);
-		
 		if (result >= 1){
 			return "修改成功：" + userRole;
 		} else {
@@ -58,10 +70,4 @@ public class UserRoleController {
 		}
 	}
 	
-	//查询所有用户角色对应关系信息
-	@RequestMapping(value = "/getAllUserRole",method = RequestMethod.GET)
-	public List<UserRole> getAllUserRole(){
-		return userRoleService.getAllUserRole();
-	}
-
 }

@@ -82,9 +82,8 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
 	
 	//删除
 	@Override
-	public int delete(UserRole userRole){
-		int row = userRoleMapper.deleteById(userRole);
-		return row;
+	public int delete(int id){
+		return userRoleMapper.deleteById(id);
 	}
 	
 	//修改

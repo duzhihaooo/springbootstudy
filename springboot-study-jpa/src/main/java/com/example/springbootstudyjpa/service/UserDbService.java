@@ -4,7 +4,7 @@ import com.example.springbootstudyjpa.pojo.User;
 import com.example.springbootstudyjpa.pojo.User2NRoles;
 import java.util.List;
 
-public interface UserService {
+public interface UserDbService {
     
     /**
      * 查找用户

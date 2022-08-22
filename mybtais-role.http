@@ -1,0 +1,36 @@
+###
+GET http://localhost:8080/role
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 2
+}
+
+###
+DELETE http://localhost:8080/role
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id":21
+}
+
+###
+POST http://localhost:8080/role
+Accept: application/json
+Content-Type: application/json
+
+{
+  "roleName": "Producer"
+}
+
+###
+PUT http://localhost:8080/role
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 5,
+  "userName": "BusinessWoman"
+}

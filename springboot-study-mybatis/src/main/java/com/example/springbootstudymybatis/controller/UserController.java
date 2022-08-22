@@ -4,45 +4,63 @@ import com.example.springbootstudymybatis.pojo.User;
 import com.example.springbootstudymybatis.pojo.User2NRoles;
 import com.example.springbootstudymybatis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-
+@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
 	private UserService userService;
 	
-	//查找用户
-	@RequestMapping(value = "/getUserInfo",method = RequestMethod.GET)
-	public User getUserInfo(){
+	/**
+	 * 根据id 查找用户
+	 * @return
+	 */
+	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
+	public User getUserInfo(@PathVariable int id){
 		
-		return userService.getUserInfo(5);
+		return userService.getUserInfo(id);
 	}
-	
-	//删除用户
-	@RequestMapping(value = "/deleteUser",method = RequestMethod.GET)
-	public String deleteUser(){
-		int result = userService.deleteUser(18);
+	/**
+	 * 查询所有用户信息
+	 * @return
+	 */
+	@RequestMapping(value = "/",method = RequestMethod.GET)
+	public List<User> getAllUser(){
+		List<User> list = userService.getAllUser();
+		return list;
+	}
+	/**
+	 * 查找一个用户对应多个角色
+	 * @return
+	 */
+	@RequestMapping(value = "/one-user-n-roles",method = RequestMethod.GET)
+	public List<User2NRoles> getOneUser2NRoles(){
+		return userService.getOneUser2NRoles();
+	}
+	/**
+	 * 根据id 删除用户
+	 * @return
+	 */
+	@RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+	public String deleteUser(@PathVariable int id){
+		int result = userService.deleteUser(id);
 		if (result >= 1){
 			return "删除成功";
 		} else {
 			return "删除失败";
 		}
 	}
-	//新增用户
-	@RequestMapping(value = "/addUser",method = RequestMethod.GET)
-	public String addUser(){
-		User user = new User();
-		//user.setId(18);
-		//好像不用像mybatis-plus需要再实体类中设置Id主键自增，可以实现添加自动自增
-		user.setUserName("Kristen");
-		//数据库能够添加成功，但是网页显示报错
-		//Console：Mapper method 'com.example.springbootstudymybatis.dao.UserDao.addUser' has an unsupported return type: class com.example.springbootstudymybatis.pojo.User] with root cause
+	
+	/**
+	 * 新增用户
+	 * @return
+	 */
+	@RequestMapping(value = "/",method = RequestMethod.POST)
+	public String addUser(@RequestBody User user){
 		int result = userService.addUser(user);
 		if (result >= 1){
 			return "添加成功:" + user;
@@ -51,12 +69,12 @@ public class UserController {
 		}
 	}
 	
-	//修改用户
-	@RequestMapping(value = "/updateUser",method = RequestMethod.GET)
-	public String updateUser(){
-		User user = new User();
-		user.setId(9);
-		user.setUserName("HelloKitty");
+	/**
+	 * 根据id 修改用户
+	 * @return
+	 */
+	@RequestMapping(value = "/",method = RequestMethod.PUT)
+	public String updateUser(@RequestBody User user){
 		int result = userService.updateUser(user);
 		if(result >= 1 ){
 			return "修改成功:"+user;
@@ -65,18 +83,6 @@ public class UserController {
 		}
 	}
 	
-	//查询所有用户信息
-	@RequestMapping(value = "/getAllUser",method = RequestMethod.GET)
-	public List<User> getAllUser(){
-		List<User> list = userService.getAllUser();
-		return list;
-	}
-	
-	//查找一个用户对应多个角色
-	@RequestMapping(value = "/getOneUser2NRoles",method = RequestMethod.GET)
-	public List<User2NRoles> getOneUser2NRoles(){
-		return userService.getOneUser2NRoles();
-	}
 	
 	
 	@RequestMapping(value = {"/hello"})

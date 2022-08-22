@@ -1,6 +1,6 @@
 package com.example.springbootstudyjpa.test;
 
-import com.example.springbootstudyjpa.service.UserService;
+import com.example.springbootstudyjpa.service.UserDbService;
 import javax.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class Test01 {
     
     @Resource
-    UserService userService;
+    UserDbService userService;
     
     @Test
     public void test01() {

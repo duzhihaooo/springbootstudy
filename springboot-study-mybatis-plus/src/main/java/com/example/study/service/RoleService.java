@@ -9,9 +9,6 @@ import java.util.List;
 
 public interface RoleService extends IService<Role> {
 	List<Role> listRole();
-	
-
-	
 	//设置通过List<Long> getRolesById(List<Long> roleList)的方法
 	List<Role> getRolesById(List<Long> roleIdList);
 	
@@ -22,10 +19,11 @@ public interface RoleService extends IService<Role> {
 	public int add(Role role);
 	
 	//2.删除一个用户
-	public int delete(Role role);
+	public int delete(int id);
 	
 	//3.修改一个用户
 	public int update(Role role);
+	
 
 	
 }
