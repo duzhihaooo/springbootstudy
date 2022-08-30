@@ -11,7 +11,7 @@ import lombok.*;
 public class User {
 	
 		@TableId(type = IdType.AUTO)
-		private Long id;
+		private Integer id;
 	
 		@TableField("user_name")
 		private String userName;

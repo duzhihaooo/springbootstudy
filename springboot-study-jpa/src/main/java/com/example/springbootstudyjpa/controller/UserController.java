@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.example.springbootstudyjpa.service.UserDbService;
+import com.example.springbootstudyjpa.service.UserRoleService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,8 +14,19 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Resource
     UserDbService userService;
+    @Resource
+    UserRoleService userRoleService;
     
     // TODO: 2022/8/15 感觉做JPA的时候怪怪的 很多方法返回的是void 就是那种定义好了 你不能用实体类去接收他们
+    /**
+     * 添加user的同时添加role
+     * 在userRole中实施关联
+     */
+    @RequestMapping(value = "/add-user-n-roles",method = RequestMethod.POST)
+    public User2NRoles addUserAddRole(@RequestBody User2NRoles user2NRoles){
+        
+        return userRoleService.addUserAddRole(user2NRoles);
+    }
     
     /**
      * 根据id 获取user
@@ -54,6 +66,7 @@ public class UserController {
      */
     @RequestMapping(value = "/one-user-n-roles", method = RequestMethod.GET)
     public List<User2NRoles> findUser2NRoles() {
+        
         return userService.findUser2NRoles();
     }
     

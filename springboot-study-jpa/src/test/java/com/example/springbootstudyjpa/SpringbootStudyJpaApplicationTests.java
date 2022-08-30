@@ -13,22 +13,4 @@ class SpringbootStudyJpaApplicationTests {
     void contextLoads() {
     }
     
-    @Autowired
-    private UserRepository userRepository;
-    
-    @Test
-    @Transactional(rollbackFor = Exception.class)
-    void setUserRepository() {
-        System.out.println(userRepository.queryUserNameById(1));
-        System.out.println(userRepository.updateUserNameById("aaa", 1));
-        System.out.println(userRepository.queryUserNameById(1));
-        
-    }
-    
-    @Transactional(rollbackFor = Exception.class)
-    @Test
-    void setUserRepository2() {
-        System.err.println(userRepository.getReferenceById(100));
-        
-    }
 }

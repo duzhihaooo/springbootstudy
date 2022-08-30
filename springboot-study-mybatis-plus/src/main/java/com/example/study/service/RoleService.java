@@ -10,7 +10,7 @@ import java.util.List;
 public interface RoleService extends IService<Role> {
 	List<Role> listRole();
 	//设置通过List<Long> getRolesById(List<Long> roleList)的方法
-	List<Role> getRolesById(List<Long> roleIdList);
+	List<Role> getRolesById(List<Integer> roleIdList);
 	
 	//查找    1个角色对应多个用户
 	List<OneRoles2NUser> getRolesUser();

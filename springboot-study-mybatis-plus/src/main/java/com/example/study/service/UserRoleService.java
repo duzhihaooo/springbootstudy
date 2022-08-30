@@ -2,6 +2,7 @@ package com.example.study.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.study.demo.OneRoles2NUser;
+import com.example.study.demo.OneUser2NRoles;
 import com.example.study.demo.Role;
 import com.example.study.demo.UserRole;
 
@@ -14,9 +15,9 @@ public interface UserRoleService extends IService<UserRole> {
     
     //List<Long> getUserIdListByRoleId(Long roleId);
     
-    List<Long> getUserIdListByRoleId(Long roleId);
+    List<Integer> getUserIdListByRoleId(int roleId);
     
-    List<Long> getRoleIdListByUserId(Long userId);
+    List<Integer> getRoleIdListByUserId(int userId);
     /*
     List<Long> getRoleIdListByUserId(Long userId);
     */
@@ -32,6 +33,7 @@ public interface UserRoleService extends IService<UserRole> {
    
     //修改
     public int update(UserRole userRole);
-    
-    
+	
+	
+	public OneUser2NRoles addUserAddRole(OneUser2NRoles oneUser2NRoles);
 }

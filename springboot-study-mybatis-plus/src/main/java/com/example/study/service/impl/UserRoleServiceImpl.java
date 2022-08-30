@@ -2,9 +2,12 @@ package com.example.study.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.study.demo.OneUser2NRoles;
 import com.example.study.demo.Role;
 import com.example.study.demo.User;
 import com.example.study.demo.UserRole;
+import com.example.study.mapper.RoleMapper;
+import com.example.study.mapper.UserMapper;
 import com.example.study.mapper.UserRoleMapper;
 import com.example.study.service.UserRoleService;
 import java.util.ArrayList;
@@ -20,9 +23,13 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
 	
 	@Resource
 	private UserRoleMapper userRoleMapper;
+	@Resource
+	private UserMapper userMapper;
+	@Resource
+	private RoleMapper roleMapper;
 	
 	@Override
-	public List<Long> getUserIdListByRoleId(Long roleId) {
+	public List<Integer> getUserIdListByRoleId(int roleId) {
 		/*1.为什么是用List去接收，因为传进来的只有1个roleId
 		  2.是不是应该用条件约束器，使进传来的roleId与数据库中的role_id匹配，从而拿到user_id
 		  3.基础太差，不知道该如何通过传进来的roleId与实体类的rid相匹配再拿到实体类的uid（应该是从oneRoles2NUserMapper.方法里面获取）
@@ -34,7 +41,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
 		//通过传进来的roleId拿到相对应的userrole集合
 		List<UserRole> list = userRoleMapper.selectList(wrapper);
 		//新建一个userRole数组
-		List<Long> userIds = new ArrayList<>();
+		List<Integer> userIds = new ArrayList<>();
 		//1.遍历刚才拿到对应的userrole集合
 		//2.遍历的每一条都是userRole对象
 		for (UserRole userRole : list) {
@@ -45,7 +52,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
 	}
 
 	@Override
-	public List<Long> getRoleIdListByUserId(Long userId){
+	public List<Integer> getRoleIdListByUserId(int userId){
 		//新建一个条件约束器
 		QueryWrapper queryWrapper = new QueryWrapper<>();
 		//将传进来的userId与数据库中的字段user_id相匹配
@@ -55,7 +62,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
 		List<UserRole> userRoleList = userRoleMapper.selectList(queryWrapper);
 		//在userrole表中拿到与userId所对应的roleId的一个集合，此时应该遍历该集合，从中提取roleid；
 		//新建一个集合去接收rid
-		List<Long> roleList = new ArrayList<>();
+		List<Integer> roleList = new ArrayList<>();
 		for (UserRole userRole:userRoleList){
 			//为什么不能用这个方法来写
 			//List<Long> roleList = userRole.getRid();
@@ -93,7 +100,23 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
 		return row;
 	}
 	
-	
-	
-	
+	@Override
+	public OneUser2NRoles addUserAddRole(OneUser2NRoles oneUser2NRoles) {
+		User user = new User();
+		List<Role> roleList = new ArrayList<>();
+		user.setUserName(oneUser2NRoles.getUserName());
+		userMapper.insert(user);
+		int uid = user.getId();
+		for (Role role1 : oneUser2NRoles.getRoles()) {
+			Role role2 = new Role();
+			role2.setRoleName(role1.getRoleName());
+			roleMapper.insert(role2);
+			int rid = role2.getId();
+			UserRole userRole = new UserRole();
+			userRole.setUid(uid);
+			userRole.setRid(rid);
+			userRoleMapper.insert(userRole);
+		}
+		return oneUser2NRoles;
+	}
 }

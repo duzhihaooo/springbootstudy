@@ -45,7 +45,7 @@ public class MybatisPlusTest {
 		
 		// 数据库中已经设置id为主键，不是传数据进去会自增吗
 		// 我不传setId的话 会报错
-		user.setId(12L);
+		user.setId(12);
 		user.setUserName("Jay");
 		
 		int insert = userMapper.insert(user);

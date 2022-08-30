@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class OneRoles2NUser {
     
-    private Long id;
+    private Integer id;
     
     private String roleName;
     List<User> users;

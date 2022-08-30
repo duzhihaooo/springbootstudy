@@ -33,9 +33,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 	
 	
 	@Override
-	public List<User> getUsersByIds(List<Long> userIds) {
+	public List<User> getUsersByIds(List<Integer> userIds) {
 		List<User> userList=new ArrayList<>();
-		for (Long id : userIds) {
+		for (Integer id : userIds) {
 			User user = userMapper.selectById(id);
 			userList.add(user);
 			
@@ -66,12 +66,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 			oneUser2NRoles.setUserName(user.getUserName());
 			//将得到的遍历的user.id通过UserRoleService层中getRoleIdListByUserId方法拿到roleId
 			//此时应该去userRoleService去实现getRoleIdListByUserId方法
-			List<Long> roleIdList = userRoleService.getRoleIdListByUserId(user.getId());
+			List<Integer> roleIdList = userRoleService.getRoleIdListByUserId(user.getId());
 			
 			//通过数据库中表UserRole，拿到了与userId对应的roleId，此时应该到数据库表Role中拿到与roleId所对应的相关详细信息
 			//List<Role> roleList = roleService.getRolesById(roleIdList);
 			List<Role> roleList2 = new ArrayList<>();
-			for (Long id:roleIdList){
+			for (Integer id:roleIdList){
 				Role role = roleMapper.selectById(id);
 				roleList2.add(role);
 			}

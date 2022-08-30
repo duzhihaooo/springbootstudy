@@ -38,3 +38,21 @@ Content-Type: application/json
   "id": 16,
   "userName": "Winnie"
 }
+
+###
+POST http://localhost:8080/user/add-user-add-role
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 1,
+  "userName": "Kassy",
+  "roleList": [
+	{
+	  "roleName": "reporter"
+	},
+	{
+	  "roleName": "referee"
+	}
+  ]
+}

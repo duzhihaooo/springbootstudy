@@ -21,7 +21,7 @@ public class OneUser2NRoles {
     * 2.设置字段id，userName对应每个User.id .name
     * 3.对应的多个角色以list集合方式传进来
     * */
-    private Long id;
+    private Integer id;
     private String userName;
     List<Role> roles;
 }

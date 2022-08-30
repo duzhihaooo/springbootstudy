@@ -30,7 +30,7 @@ public interface RoleDao {
 	//查询所有角色信息
 	List<Role> getAllRole();
 	
-	
+	void saveRoleGetId(Role role);
 	
 	
 	

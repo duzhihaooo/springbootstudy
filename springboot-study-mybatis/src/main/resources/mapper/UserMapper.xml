@@ -63,4 +63,30 @@
 	<select id="getAllUser" resultMap="BaseResultMap">
 		SELECT * FROM user;
 	</select>
+	
+	<insert id="saveUserGetId"	parameterType="com.example.springbootstudymybatis.pojo.User"
+	        useGeneratedKeys="true" keyProperty="id">
+		/*
+			insert into user (id,uerName) values (5,"bb");
+		*/
+		INSERT INTO user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userName != null">
+				user_name
+			</if>
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+		
+	</insert>
+	
  </mapper>

@@ -39,7 +39,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         List<OneRoles2NUser> oneRoles2NUsers = new ArrayList<>();
         //3.遍历for的集合
         for (Role role1 : roleList) {
-            Long roleId = role1.getId();
+            Integer roleId = role1.getId();
             //新建一个NRoles2OneUser对象
             OneRoles2NUser oneRoles2NUser = new OneRoles2NUser();
             //将遍历的每个角色Id传给OneROles2NUser
@@ -48,7 +48,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             oneRoles2NUser.setRoleName(role1.getRoleName());
             //通过roleId 获取userIdList
             //通过UserRoleService层中的getUserIdListByRoleId方法拿到userIdList   ???
-            List<Long> userIdList = userRoleService.getUserIdListByRoleId(roleId);
+            List<Integer> userIdList = userRoleService.getUserIdListByRoleId(roleId);
             //通过userIdList获取users
             List<User> users = userService.getUsersByIds(userIdList);
             //将List<User>传进oneRoles2NUsers
@@ -61,11 +61,11 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
     
     @Override
-    public List<Role> getRolesById(List<Long> roleIdList){
+    public List<Role> getRolesById(List<Integer> roleIdList){
         //新建一个对象Role的集合
         List<Role> roleList = new ArrayList<>();
         //遍历所传进来的roleIdList的值
-        for (Long id:roleIdList){
+        for (int id:roleIdList){
             //遍历的每条结果是id，所以通过selectById（）的方法查询出角色
             Role role = roleMapper.selectById(id);
             roleList.add(role);

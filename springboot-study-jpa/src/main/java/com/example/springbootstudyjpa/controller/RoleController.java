@@ -38,18 +38,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class RoleController {
     @Resource
     RoleService roleService;
-    
-    @Resource
-    UserRoleService userRoleService;
-    
-    /**
-     * 添加user的同时添加role
-     * 在userRole中实施关联
-     */
-    @RequestMapping(value = "/add-user-n-roles",method = RequestMethod.POST)
-    public User2NRoles addUserAddRole(@RequestBody User2NRoles user2NRoles){
-        return userRoleService.addUserAddRole(user2NRoles);
-    }
     /**
      * 根据 id 获取 role
      *

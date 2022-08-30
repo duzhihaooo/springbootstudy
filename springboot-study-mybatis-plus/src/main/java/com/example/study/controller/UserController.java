@@ -2,6 +2,8 @@ package com.example.study.controller;
 
 import com.example.study.demo.OneUser2NRoles;
 import com.example.study.demo.User;
+import com.example.study.demo.UserRole;
+import com.example.study.service.UserRoleService;
 import com.example.study.service.UserService;
 import java.util.List;
 import javax.annotation.Resource;
@@ -13,6 +15,18 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Resource
     private UserService userService;
+    @Resource
+    private UserRoleService userRoleService;
+    /**
+     * 添加user的同时添加role
+     * 在userRole中实施关联
+     */
+    @RequestMapping(value = "/add-user-add-role",method = RequestMethod.POST)
+    public OneUser2NRoles addUserAddRole(@RequestBody OneUser2NRoles oneUser2NRoles){
+        
+        return userRoleService.addUserAddRole(oneUser2NRoles);
+    }
+    
     /**
      * 查询所有用户
      */

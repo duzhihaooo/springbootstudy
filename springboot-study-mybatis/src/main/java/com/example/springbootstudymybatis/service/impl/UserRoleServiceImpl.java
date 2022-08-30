@@ -1,7 +1,11 @@
 package com.example.springbootstudymybatis.service.impl;
 
+import com.example.springbootstudymybatis.dao.RoleDao;
+import com.example.springbootstudymybatis.dao.UserDao;
 import com.example.springbootstudymybatis.dao.UserRoleDao;
+import com.example.springbootstudymybatis.pojo.Role;
 import com.example.springbootstudymybatis.pojo.User;
+import com.example.springbootstudymybatis.pojo.User2NRoles;
 import com.example.springbootstudymybatis.pojo.UserRole;
 import com.example.springbootstudymybatis.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,33 @@ import java.util.List;
 public class UserRoleServiceImpl implements UserRoleService {
 	@Autowired
 	UserRoleDao userRoleDao;
+	@Autowired
+	UserDao userDao;
+	@Autowired
+	RoleDao roleDao;
+	@Override
+	public User2NRoles addUserAddRole(User2NRoles user2NRoles){
+		User user = new User();
+		user.setUserName(user2NRoles.getUserName());
+		userDao.saveUserGetId(user);
+		int uid = 0;
+		int rid = 0;
+		for (Role role1:user2NRoles.getRoleList()){
+			Role role2 = new Role();
+			role2.setRoleName(role1.getRoleName());
+			roleDao.saveRoleGetId(role2);
+
+			uid = user.getId();
+			rid = role2.getId();
+			UserRole userRole = new UserRole();
+			userRole.setUserId(uid);
+			userRole.setRoleId(rid);
+			userRoleDao.addUserRole(userRole);
+		}
+		return user2NRoles;
+	}
+	
+	
 	
 	//查询指定用户角色对应关系
 	@Override

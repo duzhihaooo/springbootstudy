@@ -1,6 +1,7 @@
 package com.example.springbootstudymybatis.service;
 
 import com.example.springbootstudymybatis.pojo.User;
+import com.example.springbootstudymybatis.pojo.User2NRoles;
 import com.example.springbootstudymybatis.pojo.UserRole;
 
 import java.util.List;
@@ -23,4 +24,5 @@ public interface UserRoleService {
 	//通过rid拿到uid
 	public List<Integer> getUserIdListByRoleId(int id);
 	
+	public User2NRoles addUserAddRole(User2NRoles user2NRoles);
 }

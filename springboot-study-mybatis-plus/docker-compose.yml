@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+    mysql:
+      image: mysql:5.7
+      container_name: mybatis
+      ports:
+        - "3306:3306"
+      environment:
+        - MYSQL_DATABASE:springboot_study   #mysql启动后会默认创建一个docker的database
+        - MYSQL_ROOT_PASSWORD:123456        #root的密码
+        - MYSQL_ROOT_HOST:'%'               #代表任何机器都可以连接当前数据库
+
+    springboot:
+
+      container_name: springbootmybatisplus
+
+      ports:
+        - "8080:8080"
+
+      depends_on:
+        - mysql
+
+
+

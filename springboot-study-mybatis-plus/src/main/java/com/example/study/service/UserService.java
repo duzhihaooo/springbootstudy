@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserService extends IService<User> {
 	List<User> listUser();
     
-	List<User> getUsersByIds(List<Long> userIds);
+	List<User> getUsersByIds(List<Integer> userIds);
 	
 	
 	List<OneUser2NRoles> getOneUser2NRoles();

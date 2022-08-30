@@ -11,6 +11,10 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     # 配置连接数据库的各个信息
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://159.75.120.222:3306/springboot_study?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false
+    #部署docker时，url地址应改为mysql镜像的名字   159.75.120.222
+    url: jdbc:mysql://159.75.120.222:8888/springboot_study?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false
     username: root
     password: 123456
+
+server:
+  port: 8080

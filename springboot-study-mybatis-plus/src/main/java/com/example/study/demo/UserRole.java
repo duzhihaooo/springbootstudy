@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @TableName("nuser_1role")
 public class UserRole {
     @TableId(type = IdType.AUTO)
-    private Long id;
+    private Integer id;
     @TableField("user_id")
-    private Long uid;
+    private Integer uid;
     @TableField("role_id")
-    private Long rid;
+    private Integer rid;
     /*
      uid  rid
      1    1

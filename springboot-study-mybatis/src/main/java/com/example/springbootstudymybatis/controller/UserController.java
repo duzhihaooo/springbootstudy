@@ -2,6 +2,7 @@ package com.example.springbootstudymybatis.controller;
 
 import com.example.springbootstudymybatis.pojo.User;
 import com.example.springbootstudymybatis.pojo.User2NRoles;
+import com.example.springbootstudymybatis.service.UserRoleService;
 import com.example.springbootstudymybatis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,18 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserRoleService userRoleService;
+	/**
+	 * 添加user的同时添加role
+	 * 在userRole中实施关联
+	 */
+	@RequestMapping(value = "/add-user-add-role",method = RequestMethod.POST)
+	public User2NRoles addUserAddRole(@RequestBody User2NRoles user2NRoles){
+		return userRoleService.addUserAddRole(user2NRoles);
+	}
+	
+	
 	
 	/**
 	 * 根据id 查找用户

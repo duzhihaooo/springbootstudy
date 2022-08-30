@@ -1,5 +1,5 @@
 ###
-GET http://localhost:8080/user
+GET http://localhost:8080/user/
 Accept: application/json
 
 ###
@@ -28,4 +28,22 @@ Content-Type: application/json
 
 {
   "id": 25
+}
+
+###
+POST http://localhost:8080/user/add-user-add-role
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 1,
+  "userName": "IDLE4",
+  "roles": [
+	{
+	  "roleName": "killer"
+	},
+	{
+	  "roleName": "astronaut"
+	}
+  ]
 }
