@@ -1,9 +1,11 @@
 spring:
   jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update  #自动更新
     # 日志中显示sql语句
     show-sql: true
+
 
   # 连接数据库
   datasource:
