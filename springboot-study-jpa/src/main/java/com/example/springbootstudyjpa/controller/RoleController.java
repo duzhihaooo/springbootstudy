@@ -1,11 +1,12 @@
 package com.example.springbootstudyjpa.controller;
 
-import com.example.springbootstudyjpa.pojo.*;
+import com.example.springbootstudyjpa.exception.BizException;
+import com.example.springbootstudyjpa.pojo.Result;
+import com.example.springbootstudyjpa.pojo.Role;
+import com.example.springbootstudyjpa.pojo.Role2NUsers;
 import com.example.springbootstudyjpa.service.RoleService;
 import java.util.List;
 import javax.annotation.Resource;
-
-import com.example.springbootstudyjpa.service.UserRoleService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,23 +22,21 @@ import org.springframework.web.bind.annotation.RestController;
  * {@link PathVariable} 指的 url 拼接 /getRole/{id}
  * {@link RequestBody} 指的是 json
  * </pre>
- * 1. 添加user的同时添加role，并且实现关联 adminA roleA 添加adminA的同时把roleA添加上去，然后userROle中有一条数据是关联uid rid 思路写出来
- * user id
- * admin 1
- *
- * role id
- * role1 2
- *
- * uid rid
- * 1   2
- *
- * 2.添加role的同时添加user，并且实现关联
+ * 1. 添加 user 的同时添加 role，并且实现关联 adminA roleA 添加 adminA 的同时把 roleA 添加上去，然后 userROle 中有一条数据是关联 uid rid 思路写出来 user id admin
+ * 1
+ * <p>
+ * role id role1 2
+ * <p>
+ * uid rid 1   2
+ * <p>
+ * 2. 添加 role 的同时添加 user，并且实现关联
  */
 @RestController
 @RequestMapping("role")
 public class RoleController {
     @Resource
     RoleService roleService;
+    
     /**
      * 根据 id 获取 role
      *
@@ -46,6 +45,22 @@ public class RoleController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Role getRole(@PathVariable int id) {
         return roleService.getRoleInfo(id);
+    }
+    
+    @RequestMapping(value = "/th/{id}", method = RequestMethod.GET)
+    public Role getRoleEx(@PathVariable int id) throws BizException {
+        throw new BizException("抛出");
+    }
+    
+    /**
+     * 根据 id 获取 role
+     *
+     * @return
+     */
+    @RequestMapping(value = "/l/{id}", method = RequestMethod.GET)
+    public Result<Role> getRole1(@PathVariable int id) {
+        
+        return Result.<Role>builder().data(roleService.getRoleInfo(id)).build();
     }
     
     /**

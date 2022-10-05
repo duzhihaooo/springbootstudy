@@ -8,6 +8,8 @@ import com.example.springbootstudyjpa.pojo.User;
 import com.example.springbootstudyjpa.pojo.User2NRoles;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import javax.annotation.Resource;
 
 import com.example.springbootstudyjpa.service.UserDbService;
@@ -61,6 +63,7 @@ public class UserDbServiceImpl implements UserDbService {
     @Override
     public List<User2NRoles> findUser2NRoles() {
         List<User2NRoles> list_UR = new ArrayList<>();
+        
         //遍历所有User信息，将其填充到User2NRoles实体类呈现
         for (User user : getAllUser()) {
             User2NRoles user2NRoles = new User2NRoles();
@@ -79,6 +82,31 @@ public class UserDbServiceImpl implements UserDbService {
             user2NRoles.setRoleList(roleList);
             list_UR.add(user2NRoles);
         }
-        return list_UR;
+        //return list_UR;
+            //todo
+        Function<User, User2NRoles> userUser2NRolesFunction = user -> {
+            List<Integer> roleIdList = userRoleRepository.findRidByUid(user.getId());
+            List<Role> roleList = roleRepository.findAllById(roleIdList);
+            return User2NRoles.builder().userName(user.getUserName()).id(user.getId()).roleList(roleList).build();
+        };
+        // 流 java stream: 一句话把所有的事情做完
+        return getAllUser().stream()
+                //1.
+                //.map(user -> userToUser2NRoles(user))
+                //2.
+                .map(userUser2NRolesFunction)
+                //.map(user ->userUser2NRolesFunction.apply(user))
+                .collect(Collectors.toList());
+    
+    }
+   
+    private User2NRoles userToUser2NRoles(User user) {
+        List<Integer> roleIdList = userRoleRepository.findRidByUid(user.getId());
+        List<Role> roleList = roleRepository.findAllById(roleIdList);
+        return User2NRoles.builder()
+                .userName(user.getUserName())
+                .id(user.getId())
+                .roleList(roleList)
+                .build();
     }
 }

@@ -18,10 +18,13 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8080/role/19
+GET http://localhost:8080/role/1
 Accept: application/json
 
+
+###
+GET http://localhost:8080/role/th/1000000
+Accept: application/json
 ###
 GET http://localhost:8080/role
 Accept: application/json
-
