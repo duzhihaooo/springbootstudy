@@ -34,6 +34,7 @@ public class RoleServiceImpl implements RoleService {
     
     @Override
     public void deleteRole(final int id) {
+        //O(1)
         roleRepository.deleteById(id);
     }
     
@@ -66,6 +67,7 @@ public class RoleServiceImpl implements RoleService {
     public List<Role2NUsers> findRole2NUsers() {
         List<Role2NUsers> list_RU = new ArrayList<>();
         //遍历所有Role对象，将其填写到Role2NUsers对象中
+        //N O(N) for :O(N)
         for (Role role : getAllRole()) {
             Role2NUsers role2NUsers = new Role2NUsers();
             role2NUsers.setId(role.getId());
@@ -74,6 +76,7 @@ public class RoleServiceImpl implements RoleService {
             List<Integer> userIdList = userRoleRepository.findUidByRid(role2NUsers.getId());
             List<User> userList = new ArrayList<>();
             //再将所拿到的对应的userIdList遍历，在user表中，通过uid得到对应的user信息
+            //O(N)
             for (Integer id : userIdList) {
                 User user = new User();
                 user = userRepository.findById(id).orElse(null);
@@ -82,6 +85,7 @@ public class RoleServiceImpl implements RoleService {
             role2NUsers.setUserList(userList);
             list_RU.add(role2NUsers);
         }
+        //O(N2)
         return list_RU;
     }
     
