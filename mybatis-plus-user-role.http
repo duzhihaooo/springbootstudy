@@ -8,7 +8,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "uid": 19,
+  "uid": 1,
   "rid": 2
 }
 

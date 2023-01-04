@@ -17,6 +17,24 @@ public class UserController {
     private UserService userService;
     @Resource
     private UserRoleService userRoleService;
+    
+    /**
+     * 1.查询所有用户
+     */
+    @RequestMapping(value = "/",method = RequestMethod.GET)
+    public List<User> userList(){
+        return userService.listUser();
+    }
+    
+    /**
+     * 2.查询一个用户对应多个角色
+     * @return
+     */
+    @RequestMapping(value = "one-user-n-roles",method = RequestMethod.GET)
+    private List<OneUser2NRoles> getOneUser2NRoles(){
+        return userService.getOneUser2NRoles();
+    }
+    
     /**
      * 添加user的同时添加role
      * 在userRole中实施关联
@@ -27,21 +45,8 @@ public class UserController {
         return userRoleService.addUserAddRole(oneUser2NRoles);
     }
     
-    /**
-     * 查询所有用户
-     */
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    public List<User> userList(){
-        return userService.listUser();
-    }
-    /**
-     * 查询一个用户对应多个角色
-     * @return
-     */
-    @RequestMapping(value = "one-user-n-roles",method = RequestMethod.GET)
-    private List<OneUser2NRoles> getOneUser2NRoles(){
-        return userService.getOneUser2NRoles();
-    }
+
+
     
     /**
      * 添加一个用户

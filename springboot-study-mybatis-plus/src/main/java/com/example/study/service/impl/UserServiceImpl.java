@@ -10,8 +10,10 @@ import com.example.study.service.UserRoleService;
 import com.example.study.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.annotation.Resource;
 
+import org.apache.catalina.mbeans.RoleMBean;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,33 +33,39 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 	//依赖循环的话该怎么解决
 	*/
 	
-	
 	@Override
-	public List<User> getUsersByIds(List<Integer> userIds) {
-		List<User> userList=new ArrayList<>();
-		for (Integer id : userIds) {
-			User user = userMapper.selectById(id);
-			userList.add(user);
-			
-		}
-		return userList;
-	}
-	/**
-	 * @Transactional :update insert delete
-	 */
-	
-	
-	@Override
-	//先查询User集合
+	//1.查询User集合
 	public List<User> listUser() {
 		return userMapper.selectList(null);
+		
 	}
 	
+	
 	@Override
+	//2.查询一个用户对应多个角色
 	public List<OneUser2NRoles> getOneUser2NRoles(){
 		//新建一个OneUser2NRoless集合
 		List<OneUser2NRoles> listOneUser2NRoles = new ArrayList<>();
 		//遍历User集合              ？？：这里的listUser是该层的listUser方法吗？ 在ServiceImpl可以直接调用方法获取的结果吗？
+		listUser().stream().map(x->{
+			OneUser2NRoles oneUser2NRoles2 = new OneUser2NRoles();
+			oneUser2NRoles2.setId(x.getId());
+			oneUser2NRoles2.setUserName(x.getUserName());
+			return oneUser2NRoles2;	//通过以uid拿到的新oneUser2NRoles2.stream()
+			})
+				.map(x->{
+						final List<Integer> roleIdListByUserId = userRoleService.getRoleIdListByUserId(x.getId());
+						return roleIdListByUserId;	//拿到以uid得到的对应ridList
+				})
+					.map(x->{
+						List<Role> roleNewList = new ArrayList<>();
+						//通过对应的rid拿到对应的roleName
+						x.stream().map(k->{
+							roleNewList.add(roleMapper.selectById(k));
+							return roleNewList;
+						}).collect(Collectors.toList());
+						return roleNewList;
+					})
 		for (User user:listUser()){
 			OneUser2NRoles oneUser2NRoles = new OneUser2NRoles();
 			//将遍历的User.id 字段 赋为 oneUser2NRoles.id
@@ -81,7 +89,33 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 			listOneUser2NRoles.add(oneUser2NRoles);
 		}
 		return listOneUser2NRoles;
+		/*//思路：1).新建一个OneUser2NRoless集合去接收
+		List<OneUser2NRoles> oneUser2NRoles = new ArrayList<>();
+		//2).拿到所有的user
+		listUser().stream().map(x->x.getId()).map(x->)*/
+		
+		
+		
+		
+		
 	}
+	
+	
+	@Override
+	public List<User> getUsersByIds(List<Integer> userIds) {
+		List<User> userList=new ArrayList<>();
+		for (Integer id : userIds) {
+			User user = userMapper.selectById(id);
+			userList.add(user);
+			
+		}
+		return userList;
+	}
+	/**
+	 * @Transactional :update insert delete
+	 */
+	
+	
 	
 	//添加用户
 	@Override

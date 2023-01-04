@@ -7,12 +7,15 @@ import com.example.study.demo.User;
 import java.util.List;
 
 public interface UserService extends IService<User> {
+	//1.查询所有用户
 	List<User> listUser();
+	//2.查询一个用户对应多个角色
+	List<OneUser2NRoles> getOneUser2NRoles();
     
 	List<User> getUsersByIds(List<Integer> userIds);
 	
 	
-	List<OneUser2NRoles> getOneUser2NRoles();
+	
 	
 	//添加用户
 	public int add(User user);

@@ -8,7 +8,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "roleName": "chef"
+  "roleName": "player"
 }
 
 ###

@@ -14,4 +14,5 @@ public class SpringbootStudyJpaApplication {
         SpringApplication.run(SpringbootStudyJpaApplication.class, args);
     }
     
+    
 }
